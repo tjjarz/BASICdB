@@ -51,7 +51,7 @@ namespace BasicDb.Data
         }
 
         public DbSet<Item> Item { get; set; }
-        public DbSet<Media> Media { get; set; }
+        public DbSet<MediaCreate> Media { get; set; }
         public DbSet<Character> Character { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

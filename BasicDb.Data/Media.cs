@@ -10,7 +10,7 @@ namespace BasicDb.Data
 {
     public enum MediaType { Movie = 0, Comic, Book, Show, Play, Podcast }
 
-    public class Media
+    public class MediaCreate
     {
         [Key]
         public int MediaId { get; set; }
