@@ -11,7 +11,7 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class MediaController : ApiController
     {
-        public IHttpActionResult Post(MediaCreate media)
+        public IHttpActionResult Post(Media media)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

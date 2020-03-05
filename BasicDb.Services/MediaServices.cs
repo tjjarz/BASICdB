@@ -16,15 +16,14 @@ namespace BasicDb.Services
             _userId = userId;
         }
 
-        public bool CreateMedia(MediaCreate media)
+        public bool CreateMedia(Media model)
         {
             var entity =
-                new MediaCreate()
+                new Media()
                 {
-                    MediaId = media.MediaId,
-                    Title = media.Title,
-                    Medium = media.Medium,
-                    Description = media.Description,
+                    Title = model.Title,
+                    Medium = model.Medium,
+                    Description = model.Description,
                 };
 
             using (var ctx = new ApplicationDbContext())

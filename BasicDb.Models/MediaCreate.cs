@@ -10,9 +10,6 @@ namespace BasicDb.Models
 {
     class MediaCreate
     {
-        [Key]
-        public int MediaId { get; set; }
-
         [Required]
         public string Title { get; set; }
 
