@@ -7,13 +7,13 @@ namespace BasicDb.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class addCharMedia : IMigrationMetadata
+    public sealed partial class NewInitial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addCharMedia));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewInitial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003042108311_addCharMedia"; }
+            get { return "202003051453183_NewInitial"; }
         }
         
         string IMigrationMetadata.Source

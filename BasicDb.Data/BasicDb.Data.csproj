@@ -90,21 +90,13 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003042046507_InitialMigration.cs" />
-    <Compile Include="Migrations\202003042046507_InitialMigration.Designer.cs">
-      <DependentUpon>202003042046507_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202003051453183_NewInitial.cs" />
+    <Compile Include="Migrations\202003051453183_NewInitial.Designer.cs">
+      <DependentUpon>202003051453183_NewInitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003042049287_addCharItem.cs" />
-    <Compile Include="Migrations\202003042049287_addCharItem.Designer.cs">
-      <DependentUpon>202003042049287_addCharItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003042108311_addCharMedia.cs" />
-    <Compile Include="Migrations\202003042108311_addCharMedia.Designer.cs">
-      <DependentUpon>202003042108311_addCharMedia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003042147343_fixCharMedia.cs" />
-    <Compile Include="Migrations\202003042147343_fixCharMedia.Designer.cs">
-      <DependentUpon>202003042147343_fixCharMedia.cs</DependentUpon>
+    <Compile Include="Migrations\202003051500263_AddForeignKeysToAllTables.cs" />
+    <Compile Include="Migrations\202003051500263_AddForeignKeysToAllTables.Designer.cs">
+      <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,17 +106,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003042046507_InitialMigration.resx">
-      <DependentUpon>202003042046507_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003051453183_NewInitial.resx">
+      <DependentUpon>202003051453183_NewInitial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003042049287_addCharItem.resx">
-      <DependentUpon>202003042049287_addCharItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003042108311_addCharMedia.resx">
-      <DependentUpon>202003042108311_addCharMedia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003042147343_fixCharMedia.resx">
-      <DependentUpon>202003042147343_fixCharMedia.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003051500263_AddForeignKeysToAllTables.resx">
+      <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

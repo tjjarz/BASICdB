@@ -13,12 +13,8 @@ namespace BasicDb.Data
         [Key]
         public int CharItemID { get; set; }
 
-        //[ForeignKey(nameof(Character))]
-        //public int CharacterId { get; set; }
-        //public virtual Character Character { get; set; }
+        public List<Character> Characters { get; set; }
 
-        ////[ForeignKey("Item")]
-        ////public int ItemId { get; set; }
-        //public ICollection<Item> Item { get; set; }
+        public List<Item> Items { get; set; }
     }
 }

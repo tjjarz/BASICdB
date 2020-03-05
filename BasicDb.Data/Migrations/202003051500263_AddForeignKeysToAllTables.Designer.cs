@@ -7,13 +7,13 @@ namespace BasicDb.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class AddForeignKeysToAllTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddForeignKeysToAllTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003042046507_InitialMigration"; }
+            get { return "202003051500263_AddForeignKeysToAllTables"; }
         }
         
         string IMigrationMetadata.Source
