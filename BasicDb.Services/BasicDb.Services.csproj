@@ -54,11 +54,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicDb.Data\BasicDb.Data.csproj">
+      <Project>{562b542b-f014-457a-b16a-b9a055615c2b}</Project>
+      <Name>BasicDb.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicDb.Models\BasicDb.Models.csproj">
+      <Project>{ef07a7ab-93df-4daa-b4a0-83502d308857}</Project>
+      <Name>BasicDb.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
