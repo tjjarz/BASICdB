@@ -11,28 +11,33 @@ namespace BasicDb.Data
     public class Character
     {
         [Key]
-        public int CharID { get; set; }
+        public int CharId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         /*
         [ForeignKey(nameof(Item))]
-        public int ItemId { get; set; }
-        public virtual ICollection<Item> Item { get; set; }
-
+        public int ItemId { get; set; }*/
+        public virtual List<Item> Item { get; set; }
+        /*
         [ForeignKey(nameof(Media))]
-        public int MediaId { get; set; }
-        public virtual ICollection<Media> Media { get; set; }
-        */
+
+        public int MediaId { get; set; }*/
+        public virtual List<Media> Media { get; set; }
 
         [Required]
         public string ShortDescription { get; set; }
 
         public string Description { get; set; }
 
-        [ForeignKey(nameof(User))]
+        //[ForeignKey(nameof(User))]
         public string UserId { get; set; }
+        //public Guid UserId { get; set; }
+
         public virtual ApplicationUser User { get; set; }
+
+        // add created and updated datetimes!
+
     }
 }
