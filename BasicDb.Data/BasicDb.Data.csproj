@@ -94,6 +94,9 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
+    <Compile Include="Migrations\202003052021159_InitialCreate.cs" />
+    <Compile Include="Migrations\202003052021159_InitialCreate.designer.cs">
+      <DependentUpon>202003052021159_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +107,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003052021159_InitialCreate.resx">
+      <DependentUpon>202003052021159_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
