@@ -16,15 +16,9 @@ namespace BasicDb.Data
         [Required]
         public string Name { get; set; }
 
-        /*
-        [ForeignKey(nameof(Item))]
-        public int ItemId { get; set; }
-        public virtual ICollection<Item> Item { get; set; }
+        public virtual List<CharItem> CharItems { get; set; }
 
-        [ForeignKey(nameof(Media))]
-        public int MediaId { get; set; }
-        public virtual ICollection<Media> Media { get; set; }
-        */
+        public virtual List<CharMedia> CharMedia { get; set; }
 
         [Required]
         public string ShortDescription { get; set; }
