@@ -26,6 +26,11 @@ namespace BasicDb.Data
         public int MediaId { get; set; }*/
         public virtual List<Media> Media { get; set; }
 
+ /*    removed from Kerry submission
+        
+        public virtual List<Character> Media { get; set; }*/
+
+
         [Required]
         public string ShortDescription { get; set; }
 

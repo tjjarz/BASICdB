@@ -13,8 +13,27 @@ namespace BasicDb.Data
         [Key]
         public int CharItemID { get; set; }
 
+
+        //FIXIT! Doesn't Seem right...
+        //public List<Character> Characters { get; set; }
+
+        //public List<Item> Items { get; set; }
+
+  /*    This was all deleted by kerry update?
+        public int CharItemId { get; set; }
+
+        [ForeignKey(nameof(Character))]
+        public int CharId { get; set; }
+        public virtual Character Character { get; set; }
+
+        [ForeignKey(nameof(Item))]
+        public int ItemId { get; set; }
+        public virtual Item Item { get; set; }*/
+
+  /* on dev but not on kerry update?
         public List<Character> Characters { get; set; }
 
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; }*/
+
     }
 }

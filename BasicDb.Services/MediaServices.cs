@@ -1,4 +1,5 @@
 ﻿using BasicDb.Data;
+using BasicDb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +11,34 @@ namespace BasicDb.Services
     public class MediaService
     {
         private readonly string _userId;
-
         public MediaService(string userId)
         {
             _userId = userId;
         }
 
-        public bool CreateMedia(Media model)
+        //POST
+        public bool CreateMedia(MediaCreate media)
         {
             var entity =
                 new Media()
                 {
-                    Title = model.Title,
-                    Medium = model.Medium,
-                    Description = model.Description,
+                    MediaId = media.MediaId,
+                    Title = media.Title,
+                    Medium = media.Medium,
+                    Description = media.Description
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Media.Add(entity);
+                ctx.Medias.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
+        }
+        //GET
+        public IEnumerable<Media> GetMedia()
+        {
+            var ctx = new ApplicationDbContext();
+            return ctx.Medias.ToList();
         }
     }
 }

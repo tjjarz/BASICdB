@@ -33,11 +33,12 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<ItemGetAll> GetItems()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                return ctx.Items.ToList();
+                var query = ctx.Items.Select(e => new ItemGetAll { Description = e.Description, Name = e.Name, UserName = e.User.UserName, Type = e.Type });
+                return query.ToArray();
             }
         }
     }
