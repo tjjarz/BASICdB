@@ -102,6 +102,10 @@
     <Compile Include="Migrations\202003051500263_AddForeignKeysToAllTables.Designer.cs">
       <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003052028382_newthing.cs" />
+    <Compile Include="Migrations\202003052028382_newthing.designer.cs">
+      <DependentUpon>202003052028382_newthing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003051500263_AddForeignKeysToAllTables.resx">
       <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003052028382_newthing.resx">
+      <DependentUpon>202003052028382_newthing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
