@@ -35,16 +35,16 @@ namespace BasicDb.Services
             }
         }
 
-        
-
-        public IEnumerable<CharListItem> GetCharacters()
+        public IEnumerable<Character> GetCharacters()
         {
+            var ctx = new ApplicationDbContext();
+            return ctx.Characters.ToArray();
 
+            /*
             using (var ctx = new ApplicationDbContext()) 
             {
-                var query = ctx.Characters.Select(e => new CharListItem { CharId = e.CharId, Name = e.Name, ShortDescription = e.ShortDescription });
-                return query.ToArray();
-            }
+                return ctx.Characters.ToArray();
+            }*/
         }
 
         public CharDetail GetCharById(int id)
@@ -61,8 +61,7 @@ namespace BasicDb.Services
                         CharId = entity.CharId,
                         Name = entity.Name,
                         ShortDescription = entity.ShortDescription,
-                        Description = entity.Description,
-                        UserName = entity.UserId
+                        Description = entity.Description
                         //will need lists and user here too eventually
                     };
             }

@@ -22,12 +22,8 @@ namespace BasicDb.Data
         [Required]
         public string Description { get; set; }
 
-
-        public virtual List<CharItem> CharItems { get; set; }
-
         // add created DateTime
         // add updated DateTime
-
 
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
