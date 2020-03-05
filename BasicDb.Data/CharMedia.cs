@@ -11,14 +11,10 @@ namespace BasicDb.Data
     public class CharMedia
     {
         [Key]
-        public int CharMediaId { get; set; }
+        public int CharMediaID { get; set; }
 
-        [ForeignKey(nameof(Character))]
-        public int CharId { get; set; }
-        public virtual Character Character { get; set; }
+        public List<Character> Characters { get; set; }
 
-        [ForeignKey(nameof(Media))]
-        public int MediaId { get; set; }
-        public virtual Media Media { get; set; }
+        public List<Media> Media { get; set; }
     }
 }

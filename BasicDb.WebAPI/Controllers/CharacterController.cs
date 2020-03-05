@@ -12,14 +12,15 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class CharacterController : ApiController
     {
-        public IHttpActionResult GetAll()
+        [Authorize]
+        public IHttpActionResult Get()
         {
             CharacterService characterService = CreateCharService();
             var characters = characterService.GetCharacters();
             return Ok(characters);
         }
         
-        public IHttpActionResult GetById(int id)
+        public IHttpActionResult Get(int id)
         {
             CharacterService characterService = CreateCharService();
             var character = characterService.GetCharById(id);
