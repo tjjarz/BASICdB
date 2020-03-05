@@ -24,7 +24,7 @@ namespace BasicDb.Data
         [ForeignKey(nameof(Media))]
 
         public int MediaId { get; set; }*/
-        public virtual List<Media> Media { get; set; }
+        public virtual List<Character> Media { get; set; }
 
 
         [Required]

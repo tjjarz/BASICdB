@@ -8,22 +8,34 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Models
 {
-    class MediaCreate
+    //POST
+    public class MediaCreate
     {
+
+        public int MediaId { get; set; }
+
         [Required]
         public string Title { get; set; }
-
-        [Required]
         public MediaType Medium { get; set; }
-
-        [Required]
         public string Description { get; set; }
     }
-
-    class MediaEdit
+    
+    //GET
+    public class MediaGet
     {
         public int MediaId { get; set; }
+        public string Title { get; set; }
         public MediaType Medium { get; set; }
         public string Description { get; set; }
     }
+
+    public class MediaUpdate
+    {
+        public int MediaId { get; set; }
+        public string Title { get; set; }
+        public MediaType Medium { get; set; }
+        public string Description { get; set; }
+    }
+
+    
 }
