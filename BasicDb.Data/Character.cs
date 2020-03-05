@@ -16,14 +16,20 @@ namespace BasicDb.Data
         [Required]
         public string Name { get; set; }
 
-        /*
+
+        public virtual List<CharItem> CharItems { get; set; }
+
+        public virtual List<CharMedia> CharMedia { get; set; }
+
+        /* master stuff
         [ForeignKey(nameof(Item))]
-        public int ItemId { get; set; }*/
+        public int ItemId { get; set; }
         public virtual List<Item> Item { get; set; }
-        /*
+        
         [ForeignKey(nameof(Media))]
-        public int MediaId { get; set; }*/
-        public virtual List<Media> Media { get; set; }
+        public int MediaId { get; set; }
+        public virtual List<Media> Media { get; set; }*/
+
 
         [Required]
         public string ShortDescription { get; set; }

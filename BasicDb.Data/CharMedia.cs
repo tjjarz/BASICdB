@@ -11,6 +11,14 @@ namespace BasicDb.Data
     public class CharMedia
     {
         [Key]
+
+        public int CharMediaID { get; set; }
+
+        //public List<Character> Characters { get; set; }
+
+        //public List<Media> Media { get; set; }
+
+  /*  master stuff
         public int CharMediaId { get; set; }
 
         [ForeignKey(nameof(Character))]
@@ -19,6 +27,7 @@ namespace BasicDb.Data
 
         [ForeignKey(nameof(Media))]
         public int MediaId { get; set; }
-        public virtual Media Media { get; set; }
+        public virtual Media Media { get; set; }*/
+
     }
 }
