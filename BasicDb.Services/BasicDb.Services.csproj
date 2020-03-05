@@ -57,7 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharItemService.cs" />
+
+    <Compile Include="CharacterService.cs" />
+
+    <Compile Include="ItemService.cs" />
+
+    <Compile Include="MediaServices.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasicDb.Data\BasicDb.Data.csproj">
+
       <Project>{562b542b-f014-457a-b16a-b9a055615c2b}</Project>
       <Name>BasicDb.Data</Name>
     </ProjectReference>
@@ -73,6 +80,7 @@
       <Project>{ef07a7ab-93df-4daa-b4a0-83502d308857}</Project>
       <Name>BasicDb.Models</Name>
     </ProjectReference>
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

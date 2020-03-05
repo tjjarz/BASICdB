@@ -57,7 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetCharItem.cs" />
+
+    <Compile Include="CharacterModels.cs" />
+
+    <Compile Include="ItemModels.cs" />
+
+    <Compile Include="MediaCreate.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

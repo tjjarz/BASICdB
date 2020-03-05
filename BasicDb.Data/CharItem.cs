@@ -11,10 +11,23 @@ namespace BasicDb.Data
     public class CharItem
     {
         [Key]
+
         public int CharItemID { get; set; }
 
         //public List<Character> Characters { get; set; }
 
         //public List<Item> Items { get; set; }
+
+  /*    master stuff here
+        public int CharItemId { get; set; }
+
+        [ForeignKey(nameof(Character))]
+        public int CharId { get; set; }
+        public virtual Character Character { get; set; }
+
+        [ForeignKey(nameof(Item))]
+        public int ItemId { get; set; }
+        public virtual Item Item { get; set; }*/
+
     }
 }

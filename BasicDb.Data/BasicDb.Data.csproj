@@ -73,6 +73,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -93,25 +94,6 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003051659431_ChgCharacter.cs" />
-    <Compile Include="Migrations\202003051659431_ChgCharacter.designer.cs">
-      <DependentUpon>202003051659431_ChgCharacter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003051704534_AddLinkFiles.cs" />
-    <Compile Include="Migrations\202003051704534_AddLinkFiles.designer.cs">
-      <DependentUpon>202003051704534_AddLinkFiles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003051706397_AddLinkFilesFix.cs" />
-    <Compile Include="Migrations\202003051706397_AddLinkFilesFix.designer.cs">
-      <DependentUpon>202003051706397_AddLinkFilesFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003051712582_AttemptFixForeignKeys.cs" />
-    <Compile Include="Migrations\202003051712582_AttemptFixForeignKeys.designer.cs">
-      <DependentUpon>202003051712582_AttemptFixForeignKeys.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003052131162_fixCharItemService.cs" />
-    <Compile Include="Migrations\202003052131162_fixCharItemService.designer.cs">
-      <DependentUpon>202003052131162_fixCharItemService.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,21 +102,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003051659431_ChgCharacter.resx">
-      <DependentUpon>202003051659431_ChgCharacter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051704534_AddLinkFiles.resx">
-      <DependentUpon>202003051704534_AddLinkFiles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051706397_AddLinkFilesFix.resx">
-      <DependentUpon>202003051706397_AddLinkFilesFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051712582_AttemptFixForeignKeys.resx">
-      <DependentUpon>202003051712582_AttemptFixForeignKeys.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003052131162_fixCharItemService.resx">
-      <DependentUpon>202003052131162_fixCharItemService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
