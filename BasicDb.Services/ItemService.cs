@@ -32,5 +32,13 @@ namespace BasicDb.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public IEnumerable<Item> GetItems()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                return ctx.Items.ToList();
+            }
+        }
     }
 }

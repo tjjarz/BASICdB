@@ -12,6 +12,7 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class ItemController : ApiController
     {
+        [Authorize]
         private ItemService CreateItemService()
         {
             var userId = User.Identity.GetUserId();
@@ -40,6 +41,14 @@ namespace BasicDb.WebAPI.Controllers
             }
 
             return Ok(item);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+            ItemService itemService = CreateItemService();
+            var items = itemService.GetItems();
+            return Ok(items);
         }
     }
 }
