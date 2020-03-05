@@ -14,6 +14,7 @@ namespace BasicDb.Data
 
         public int CharItemID { get; set; }
 
+        //FIXIT! Doesn't Seem right...
         //public List<Character> Characters { get; set; }
 
         //public List<Item> Items { get; set; }
@@ -28,6 +29,7 @@ namespace BasicDb.Data
         [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }
         public virtual Item Item { get; set; }*/
+
 
     }
 }

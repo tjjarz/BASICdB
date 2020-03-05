@@ -19,4 +19,12 @@ namespace BasicDb.Models
         public string UserId { get; set; }
         //public virtual ApplicationUser User { get; set; }
     }
+
+    public class ItemGetAll
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string UserName { get; set; }
+        public string Description { get; set; }
+    }
 }
