@@ -15,7 +15,7 @@ namespace BasicDb.Data
 
         [Required]
         public string Name { get; set; }
-        
+
         /*
         [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }

@@ -50,9 +50,11 @@ namespace BasicDb.Data
             return new ApplicationDbContext();
         }
 
-        public DbSet<Item> Item { get; set; }
+        public DbSet<Item> Items { get; set; }
         public DbSet<Media> Media { get; set; }
-        public DbSet<Character> Character { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<CharItem> CharItems { get; set; }
+        public DbSet<CharMedia> CharMedia { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
