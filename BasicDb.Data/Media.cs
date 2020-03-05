@@ -24,8 +24,6 @@ namespace BasicDb.Data
         [Required]
         public string Description { get; set; }
 
-        public virtual List<CharMedia> CharMedia { get; set; }
-
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
