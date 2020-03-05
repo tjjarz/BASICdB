@@ -26,7 +26,6 @@ namespace BasicDb.Data
         public int MediaId { get; set; }*/
         public virtual List<Media> Media { get; set; }
 
-
         [Required]
         public string ShortDescription { get; set; }
 
