@@ -15,17 +15,17 @@ namespace BasicDb.WebAPI.Controllers
         [Authorize]
         public IHttpActionResult Get()
         {
-            CharacterService characterService = CreateCharacterService();
+            CharacterService characterService = CreateCharService();
             var characters = characterService.GetCharacters();
             return Ok(characters);
         }
-        /*
+        
         public IHttpActionResult Get(int id)
         {
-            CharacterService characterService = CreateNoteService();
-            var characters = characterService.GetNoteById(id);
-            return Ok(note);
-        }
+            CharacterService characterService = CreateCharService();
+            var character = characterService.GetCharById(id);
+            return Ok(character);
+        }/*
         public IHttpActionResult Put(NoteEdit note)
         {
             if (!ModelState.IsValid)
@@ -39,27 +39,27 @@ namespace BasicDb.WebAPI.Controllers
             return Ok();
         }*/
 
-        public IHttpActionResult Post(CharacterCreate character)
+        public IHttpActionResult Post(CharCreate character)
         {
             if (ModelState.IsValid == false) return BadRequest(ModelState);
-            var service = CreateCharacterService();
+            var service = CreateCharService();
 
             //service.CreateCharacter()
             if (service.CreateCharacter(character) == false) return InternalServerError();
             return Ok();
         }
-        /*
+        
         public IHttpActionResult Delete(int id)
         {
-            var service = CreateCharacterService();
+            var service = CreateCharService();
 
-            if (!service.DeleteNote(id))
+            if (!service.DeleteChar(id))
                 return InternalServerError();
 
             return Ok();
-        }*/
+        }
 
-        private CharacterService CreateCharacterService()
+        private CharacterService CreateCharService()
         {
             /*var userId = User.Identity.GetUserId;
             //var userId = User.Identity.Name;

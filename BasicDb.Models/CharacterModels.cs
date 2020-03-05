@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Models
 {
-    public class CharacterCreate
+    public class CharCreate
     {
         [Required]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
@@ -21,8 +21,33 @@ namespace BasicDb.Models
         public string Description { get; set; }
     }
 
-    public class CharacterEdit
+    public class CharEdit
     {
+        public int CharId { get; set; }
+        public string Name { get; set; }
+        public string ShortDescription { get; set; }
+        public string Description { get; set; }
 
+    }
+
+    public class CharDetail
+    {
+        public int CharId { get; set; }
+        public string Name { get; set; }
+        public string ShortDescription { get; set; }
+        public string Description { get; set; }
+
+        //saved for later
+        //public virtual List<Item> Item { get; set; }
+        //public virtual List<Media> Media { get; set; }
+        //public string UserId { get; set; }
+
+    }
+
+    public class CharListItem
+    {
+        public int CharId { get; set; }
+        public string Name { get; set; }
+        public string ShortDescription { get; set; }
     }
 }

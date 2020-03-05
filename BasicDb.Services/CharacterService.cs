@@ -17,7 +17,7 @@ namespace BasicDb.Services
         }
         public CharacterService() { }
 
-        public bool CreateCharacter(CharacterCreate character)
+        public bool CreateCharacter(CharCreate character)
         {
             var entity =
                 new Character()
@@ -47,32 +47,49 @@ namespace BasicDb.Services
             }*/
         }
 
-        public bool UpdateCharacter(CharacterEdit model)
+        public CharDetail GetCharById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Notes
-                        .Single(e => e.NoteId == model.NoteId && e.OwnerId == _userId);
+                        .Characters
+                        .Single(e => e.CharId == id);
+                return
+                    new CharDetail
+                    {
+                        CharId = entity.CharId,
+                        Name = entity.Name,
+                        ShortDescription = entity.ShortDescription,
+                        Description = entity.Description
+                        //will need lists and user here too eventually
+                    };
+            }
+        }
 
-                entity.Title = model.Title;
-                entity.Content = model.Content;
-                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+        public bool UpdateCharacter(CharEdit character)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
+                entity.Name = character.Name;
+                entity.ShortDescription = character.ShortDescription;
+                entity.Description = character.Description;
+                //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteNote(int noteId)
+        public bool DeleteChar(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Notes
-                        .Single(e => e.NoteId == noteId && e.OwnerId == _userId);
+                        .Characters
+                        .Single(e => e.CharId == id);
 
-                ctx.Notes.Remove(entity);
+                ctx.Characters.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
