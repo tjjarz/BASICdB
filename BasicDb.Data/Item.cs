@@ -22,6 +22,9 @@ namespace BasicDb.Data
         [Required]
         public string Description { get; set; }
 
+        // add created DateTime
+        // add updated DateTime
+
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
