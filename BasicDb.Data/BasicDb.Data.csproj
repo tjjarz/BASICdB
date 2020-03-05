@@ -94,13 +94,6 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003052136477_migration.cs" />
-    <Compile Include="Migrations\202003052136477_migration.designer.cs">
-      <DependentUpon>202003052136477_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003052028382_newthing.cs" />
-    <Compile Include="Migrations\202003052028382_newthing.designer.cs">
-      <DependentUpon>202003052028382_newthing.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,12 +102,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003052136477_migration.resx">
-      <DependentUpon>202003052136477_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003052028382_newthing.resx">
-      <DependentUpon>202003052028382_newthing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -27,7 +27,7 @@ namespace BasicDb.Models
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
-
+        public string UserName { get; set; }
     }
 
     public class CharDetail
@@ -36,6 +36,7 @@ namespace BasicDb.Models
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
+        public string UserName { get; set; }
 
         //saved for later
         //public virtual List<Item> Item { get; set; }
@@ -49,5 +50,6 @@ namespace BasicDb.Models
         public int CharId { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
+     
     }
 }

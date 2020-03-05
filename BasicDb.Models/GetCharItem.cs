@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasicDb.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,32 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicDb.Data
+namespace BasicDb.Models
 {
-    public class Item
+    public class GetCharItem
     {
-        [Key]
-        public int ItemId { get; set; }
-
-        [Required]
-        public string Type { get; set; }
-
         [Required]
         public string Name { get; set; }
 
         [Required]
+        public string ShortDescription { get; set; }
+
+        [Required]
         public string Description { get; set; }
 
+        public List<Item> items { get; set; }
 
-        public virtual List<CharItem> CharItems { get; set; }
-
-        // add created DateTime
-        // add updated DateTime
-
-
+        [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser User { get; set; }
-
     }
 }
