@@ -15,6 +15,6 @@ namespace BasicDb.Data
 
         public List<Character> Characters { get; set; }
 
-        public List<Media> Media { get; set; }
+        public List<CharMedia> Media { get; set; }
     }
 }

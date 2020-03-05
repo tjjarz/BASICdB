@@ -1,9 +1,9 @@
-namespace BasicDb.Data.Migrations
+﻿namespace BasicDb.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewInitial : DbMigration
+    public partial class migration : DbMigration
     {
         public override void Up()
         {
@@ -11,18 +11,44 @@ namespace BasicDb.Data.Migrations
                 "dbo.Character",
                 c => new
                     {
-                        CharID = c.Int(nullable: false, identity: true),
+                        CharId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         ShortDescription = c.String(nullable: false),
                         Description = c.String(),
                         UserId = c.String(maxLength: 128),
+                        Character_CharId = c.Int(),
+                        CharItem_CharItemID = c.Int(),
                         CharMedia_CharMediaID = c.Int(),
                     })
-                .PrimaryKey(t => t.CharID)
+                .PrimaryKey(t => t.CharId)
+                .ForeignKey("dbo.Character", t => t.Character_CharId)
                 .ForeignKey("dbo.ApplicationUser", t => t.UserId)
+                .ForeignKey("dbo.CharItem", t => t.CharItem_CharItemID)
                 .ForeignKey("dbo.CharMedia", t => t.CharMedia_CharMediaID)
                 .Index(t => t.UserId)
+                .Index(t => t.Character_CharId)
+                .Index(t => t.CharItem_CharItemID)
                 .Index(t => t.CharMedia_CharMediaID);
+            
+            CreateTable(
+                "dbo.Item",
+                c => new
+                    {
+                        ItemId = c.Int(nullable: false, identity: true),
+                        Type = c.String(nullable: false),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                        Character_CharId = c.Int(),
+                        CharItem_CharItemID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ItemId)
+                .ForeignKey("dbo.ApplicationUser", t => t.UserId)
+                .ForeignKey("dbo.Character", t => t.Character_CharId)
+                .ForeignKey("dbo.CharItem", t => t.CharItem_CharItemID)
+                .Index(t => t.UserId)
+                .Index(t => t.Character_CharId)
+                .Index(t => t.CharItem_CharItemID);
             
             CreateTable(
                 "dbo.ApplicationUser",
@@ -98,22 +124,11 @@ namespace BasicDb.Data.Migrations
                 c => new
                     {
                         CharMediaID = c.Int(nullable: false, identity: true),
+                        CharMedia_CharMediaID = c.Int(),
                     })
-                .PrimaryKey(t => t.CharMediaID);
-            
-            CreateTable(
-                "dbo.Item",
-                c => new
-                    {
-                        ItemId = c.Int(nullable: false, identity: true),
-                        Type = c.String(nullable: false),
-                        Name = c.String(nullable: false),
-                        Description = c.String(nullable: false),
-                        UserId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.ItemId)
-                .ForeignKey("dbo.ApplicationUser", t => t.UserId)
-                .Index(t => t.UserId);
+                .PrimaryKey(t => t.CharMediaID)
+                .ForeignKey("dbo.CharMedia", t => t.CharMedia_CharMediaID)
+                .Index(t => t.CharMedia_CharMediaID);
             
             CreateTable(
                 "dbo.Media",
@@ -144,29 +159,39 @@ namespace BasicDb.Data.Migrations
         {
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
             DropForeignKey("dbo.Media", "UserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Item", "UserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.CharMedia", "CharMedia_CharMediaID", "dbo.CharMedia");
             DropForeignKey("dbo.Character", "CharMedia_CharMediaID", "dbo.CharMedia");
+            DropForeignKey("dbo.Item", "CharItem_CharItemID", "dbo.CharItem");
+            DropForeignKey("dbo.Character", "CharItem_CharItemID", "dbo.CharItem");
             DropForeignKey("dbo.Character", "UserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Character", "Character_CharId", "dbo.Character");
+            DropForeignKey("dbo.Item", "Character_CharId", "dbo.Character");
+            DropForeignKey("dbo.Item", "UserId", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropIndex("dbo.Media", new[] { "UserId" });
-            DropIndex("dbo.Item", new[] { "UserId" });
+            DropIndex("dbo.CharMedia", new[] { "CharMedia_CharMediaID" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.Item", new[] { "CharItem_CharItemID" });
+            DropIndex("dbo.Item", new[] { "Character_CharId" });
+            DropIndex("dbo.Item", new[] { "UserId" });
             DropIndex("dbo.Character", new[] { "CharMedia_CharMediaID" });
+            DropIndex("dbo.Character", new[] { "CharItem_CharItemID" });
+            DropIndex("dbo.Character", new[] { "Character_CharId" });
             DropIndex("dbo.Character", new[] { "UserId" });
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Media");
-            DropTable("dbo.Item");
             DropTable("dbo.CharMedia");
             DropTable("dbo.CharItem");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
+            DropTable("dbo.Item");
             DropTable("dbo.Character");
         }
     }

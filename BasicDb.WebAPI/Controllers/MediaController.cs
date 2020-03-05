@@ -1,4 +1,5 @@
 ﻿using BasicDb.Data;
+using BasicDb.Models;
 using BasicDb.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -11,7 +12,8 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class MediaController : ApiController
     {
-        public IHttpActionResult Post(Media media)
+        //POST
+        public IHttpActionResult Post(MediaCreate media)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -29,6 +31,13 @@ namespace BasicDb.WebAPI.Controllers
             var userId = User.Identity.GetUserId();
             var mediaService = new MediaService(userId);
             return mediaService;
+        }
+
+        public IHttpActionResult Get()
+        {
+            MediaService mediaService = CreateMediaService();
+            var medias = mediaService.GetMedia();
+            return Ok(medias);
         }
     }
 }
