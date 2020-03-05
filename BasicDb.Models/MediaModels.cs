@@ -19,4 +19,11 @@ namespace BasicDb.Models
         [Required]
         public string Description { get; set; }
     }
+
+    class MediaEdit
+    {
+        public int MediaId { get; set; }
+        public MediaType Medium { get; set; }
+        public string Description { get; set; }
+    }
 }
