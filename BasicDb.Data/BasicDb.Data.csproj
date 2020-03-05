@@ -94,9 +94,13 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003052021159_InitialCreate.cs" />
-    <Compile Include="Migrations\202003052021159_InitialCreate.designer.cs">
-      <DependentUpon>202003052021159_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202003051453183_NewInitial.cs" />
+    <Compile Include="Migrations\202003051453183_NewInitial.Designer.cs">
+      <DependentUpon>202003051453183_NewInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003051500263_AddForeignKeysToAllTables.cs" />
+    <Compile Include="Migrations\202003051500263_AddForeignKeysToAllTables.Designer.cs">
+      <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,10 +109,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003052021159_InitialCreate.resx">
-      <DependentUpon>202003052021159_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003051453183_NewInitial.resx">
+      <DependentUpon>202003051453183_NewInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003051500263_AddForeignKeysToAllTables.resx">
+      <DependentUpon>202003051500263_AddForeignKeysToAllTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
