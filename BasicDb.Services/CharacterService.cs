@@ -10,8 +10,8 @@ namespace BasicDb.Services
 {
     public class CharacterService
     {
-        private readonly Guid _userId;
-        public CharacterService(Guid userId)
+        private readonly string _userId;
+        public CharacterService(string userId)
         {
             _userId = userId;
         }
