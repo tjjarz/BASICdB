@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+#adding this to help resolve some obnoxious merge issues
+*.csproj
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
