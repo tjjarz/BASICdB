@@ -57,7 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
     <Compile Include="ItemService.cs" />
+
+    <Compile Include="MediaServices.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +73,12 @@
       <Project>{562B542B-F014-457A-B16A-B9A055615C2B}</Project>
       <Name>BasicDb.Data</Name>
     </ProjectReference>
+
     <ProjectReference Include="..\BasicDb.Models\BasicDb.Models.csproj">
       <Project>{EF07A7AB-93DF-4DAA-B4A0-83502D308857}</Project>
       <Name>BasicDb.Models</Name>
     </ProjectReference>
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
