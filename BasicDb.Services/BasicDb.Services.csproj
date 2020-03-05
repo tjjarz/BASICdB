@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
 
+    <Compile Include="CharacterService.cs" />
+
     <Compile Include="ItemService.cs" />
 
     <Compile Include="MediaServices.cs" />
@@ -70,6 +72,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasicDb.Data\BasicDb.Data.csproj">
+
+      <Project>{562b542b-f014-457a-b16a-b9a055615c2b}</Project>
+      <Name>BasicDb.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicDb.Models\BasicDb.Models.csproj">
+      <Project>{ef07a7ab-93df-4daa-b4a0-83502d308857}</Project>
+      <Name>BasicDb.Models</Name>
+    </ProjectReference>
+
       <Project>{562B542B-F014-457A-B16A-B9A055615C2B}</Project>
       <Name>BasicDb.Data</Name>
     </ProjectReference>
