@@ -20,7 +20,7 @@ namespace BasicDb.Services
         {
             var entity = new Item()
             {
-                UserId = _userId,
+                AddedBy = _userId,
                 Type = model.Type,
                 Name = model.Name,
                 Description = model.Description
@@ -37,7 +37,7 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Items.Select(e => new ItemGetAll { Description = e.Description, Name = e.Name, UserName = e.User.UserName, Type = e.Type });
+                var query = ctx.Items.Select(e => new ItemGetAll { Description = e.Description, Name = e.Name, AddedBy = e.User.UserName, Type = e.Type, ItemId = e.ItemId });
                 return query.ToArray();
             }
         }
@@ -46,7 +46,7 @@ namespace BasicDb.Services
         {
             using(var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == model.ItemId && e.UserId == _userId);
+                var entity = ctx.Items.Single(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
 
                 entity.Name = model.Name;
                 entity.Description = model.Description;
@@ -60,7 +60,7 @@ namespace BasicDb.Services
         {
             using(var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == itemId && e.UserId == _userId);
+                var entity = ctx.Items.Single(e => e.ItemId == itemId && e.AddedBy == _userId);
 
                 ctx.Items.Remove(entity);
 
@@ -72,7 +72,7 @@ namespace BasicDb.Services
         {
             using(var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == id && e.UserId == _userId);
+                var entity = ctx.Items.Single(e => e.ItemId == id);
 
                 return new ItemDetail
                 {
@@ -80,7 +80,7 @@ namespace BasicDb.Services
                     Name = entity.Name,
                     Type = entity.Type,
                     Description = entity.Description,
-                    UserId = entity.UserId
+                    AddedBy = entity.User.UserName
                 };
             }
         }

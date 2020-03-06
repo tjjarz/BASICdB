@@ -55,7 +55,7 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetItemById(int id)
         {
             ItemService service = CreateItemService();
-            var item = service.GerItemById(id);
+            var item = service.GetItemById(id);
             return Ok(item);
         }
 
