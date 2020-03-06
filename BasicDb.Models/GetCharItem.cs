@@ -11,16 +11,17 @@ namespace BasicDb.Models
 {
     public class GetCharItem
     {
-        [Required]
         public string Name { get; set; }
 
-        [Required]
         public string ShortDescription { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
-        public List<Item> items { get; set; }
+        public List<Item> CharItems { get; set; }
+
+        //[ForeignKey(nameof(Item))]
+        //public int ItemId { get; set; }
+        //public virtual Item Item { get; set; }
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }

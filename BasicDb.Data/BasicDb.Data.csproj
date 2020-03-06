@@ -113,6 +113,10 @@
     <Compile Include="Migrations\202003052131162_fixCharItemService.designer.cs">
       <DependentUpon>202003052131162_fixCharItemService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003061501539_FixCharacter.cs" />
+    <Compile Include="Migrations\202003061501539_FixCharacter.designer.cs">
+      <DependentUpon>202003061501539_FixCharacter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003052131162_fixCharItemService.resx">
       <DependentUpon>202003052131162_fixCharItemService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003061501539_FixCharacter.resx">
+      <DependentUpon>202003061501539_FixCharacter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

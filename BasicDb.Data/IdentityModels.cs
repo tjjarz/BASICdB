@@ -52,7 +52,7 @@ namespace BasicDb.Data
 
         public DbSet<Item> Item { get; set; }
         public DbSet<Media> Media { get; set; }
-        public DbSet<Character> Character { get; set; }
+        public DbSet<Character> Characters { get; set; }
         public DbSet<CharItem> CharItems { get; set; }
         public DbSet<CharMedia> CharMedia { get; set; }
 

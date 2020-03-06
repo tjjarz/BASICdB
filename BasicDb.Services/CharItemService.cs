@@ -1,4 +1,5 @@
 ﻿using BasicDb.Data;
+using BasicDb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,22 +31,24 @@ namespace BasicDb.Services
             }
         }
 
-        public Character getCharItemsByCharId(int charId)
+        public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
         {
-            List<Item> ItemList = new List<Item>();
+            //List<Item> ItemList = new List<Item>();
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Character
-                    .Single(e => e.CharID == charId);
-                    return new Character
+                    .CharItems
+                    .Where(e => e.Character.CharId == charId)
+                    .Select
+                    (e => new GetCharItem
                     {
-                        Name = entity.Name,
-                        ShortDescription = entity.ShortDescription,
-                        Description = entity.Description,
-                        CharItems = entity.CharItems
-                    };
+                        Name = e.Character.Name,
+                        ShortDescription = e.Character.ShortDescription,
+                        Description = e.Character.Description,
+                        CharItems = e.Character.Item  //.ToArray()
+                    });
+                return entity.ToArray();
             }
         }
     }

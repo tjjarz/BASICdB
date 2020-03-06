@@ -1,4 +1,5 @@
 ﻿using BasicDb.Data;
+using BasicDb.Models;
 using BasicDb.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -23,8 +24,8 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetCharItems(int charId)
         {
             CharItemService charItemService = CreateCharItemService();
-            var charItem = charItemService.getCharItemsByCharId(charId);
-            return Ok(charItem);
+            var charItems = charItemService.getCharItemsByCharId(charId);
+            return Ok(charItems);
         }
     }
 }
