@@ -50,5 +50,40 @@ namespace BasicDb.WebAPI.Controllers
             var items = itemService.GetItems();
             return Ok(items);
         }
+
+        [HttpGet]
+        public IHttpActionResult GetItemById(int id)
+        {
+            ItemService service = CreateItemService();
+            var item = service.GetItemById(id);
+            return Ok(item);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put(ItemEdit item)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (item == null)
+                return BadRequest("Model must not be null");
+
+            var service = CreateItemService();
+
+            if (!service.UpdateItem(item))
+                return InternalServerError();
+
+            return Ok(item);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateItemService();
+
+            if (!service.DeleteItem(id))
+                return InternalServerError();
+
+            return Ok("Successfully Deleted Item");
+        }
     }
 }
