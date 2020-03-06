@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditCharItem.cs" />
     <Compile Include="GetCharItem.cs" />
     <Compile Include="PostCharItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

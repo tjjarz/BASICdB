@@ -36,6 +36,32 @@ namespace BasicDb.WebAPI.Controllers
             return Ok();
         }
 
+        public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateCharItemService();
+            if (!service.UpdateCharItemById(charItem, editCharItem))
+            {
+                return InternalServerError();
+            }
+            return Ok();
+        }
+
+        public IHttpActionResult DeleteCharItemById(int charItemId)
+        {
+            var service = CreateCharItemService();
+            if (!service.DeleteCharItemById(charItemId))
+            {
+                return InternalServerError();
+            }
+            return Ok();
+        }
+
+
         public IHttpActionResult GetCharItems(int charId)
         {
             CharItemService charItemService = CreateCharItemService();

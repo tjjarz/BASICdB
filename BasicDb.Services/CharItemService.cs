@@ -10,11 +10,8 @@ namespace BasicDb.Services
 {
     public class CharItemService
     {
-        //private readonly string _userId;
-
         public CharItemService()
         {
-            //_userId = userId;
         }
 
         public bool CreateCharItem(PostCharItem model)
@@ -22,7 +19,6 @@ namespace BasicDb.Services
             var entity =
                 new CharItem()
                 {
-                    //UserId = _userId
                     CharId = model.CharId,
                     ItemId = model.ItemId
                 };
@@ -37,9 +33,42 @@ namespace BasicDb.Services
             }
         }
 
+        public bool UpdateCharItemById(int charItemId, PostCharItem model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
+                {
+                    return false;
+                }
+                var entity =
+                    ctx
+                        .CharItems
+                        .Single(e => e.CharItemId == charItemId);
+
+                entity.CharId = model.CharId;
+                entity.ItemId = model.ItemId;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteCharItemById(int charItemId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharItems
+                    .Single(e => e.CharItemId == charItemId);
+
+                ctx.CharItems.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
         public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
         {
-
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
