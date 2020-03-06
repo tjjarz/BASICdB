@@ -15,6 +15,7 @@ namespace BasicDb.Services
         {
             _userId = userId;
         }
+        public MediaService() { }
 
         //POST
         public bool CreateMedia(MediaCreate media)
@@ -34,11 +35,44 @@ namespace BasicDb.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
         //GET
         public IEnumerable<Media> GetMedia()
         {
             var ctx = new ApplicationDbContext();
             return ctx.Media.ToList();
+        }
+
+        //UPDATE
+        public bool UpdateMedia(MediaUpdate media)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Medias.Single(e => e.MediaId == media.MediaId);
+                entity.MediaId = media.MediaId;
+                entity.Title = media.Title;
+                entity.Medium = media.Medium;
+                entity.Description = media.Description;
+                //entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        //DELETE
+        public bool DeleteMedia(int Id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Medias
+                        .Single(e => e.MediaId == Id);
+
+                ctx.Medias.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
         }
     }
 }
