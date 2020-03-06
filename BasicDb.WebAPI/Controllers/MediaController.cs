@@ -33,11 +33,39 @@ namespace BasicDb.WebAPI.Controllers
             return mediaService;
         }
 
+        //GET
         public IHttpActionResult Get()
         {
             MediaService mediaService = CreateMediaService();
             var medias = mediaService.GetMedia();
             return Ok(medias);
         }
+
+        //UPDATE
+        public IHttpActionResult Update(MediaUpdate media)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateMediaService();
+
+            if (!service.UpdateMedia(media))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        //DELETE
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateMediaService();
+
+            if (!service.DeleteMedia(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
+
 }
+
