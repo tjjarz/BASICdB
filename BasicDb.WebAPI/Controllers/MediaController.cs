@@ -13,6 +13,7 @@ namespace BasicDb.WebAPI.Controllers
     public class MediaController : ApiController
     {
         //POST
+        [HttpPost]
         public IHttpActionResult Post(MediaCreate media)
         {
             if (!ModelState.IsValid)
@@ -28,16 +29,46 @@ namespace BasicDb.WebAPI.Controllers
 
         private MediaService CreateMediaService()
         {
-            var userId = User.Identity.GetUserId();
-            var mediaService = new MediaService(userId);
+            var mediaService = new MediaService();
             return mediaService;
         }
 
+        //GET
+        [HttpGet]
         public IHttpActionResult Get()
         {
             MediaService mediaService = CreateMediaService();
             var medias = mediaService.GetMedia();
             return Ok(medias);
         }
+
+        //UPDATE
+        [HttpPut]
+        public IHttpActionResult Update(MediaUpdate media)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateMediaService();
+
+            if (!service.UpdateMedia(media))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        //DELETE
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateMediaService();
+
+            if (!service.DeleteMedia(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
+
 }
+
