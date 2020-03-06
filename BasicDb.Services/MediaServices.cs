@@ -15,6 +15,7 @@ namespace BasicDb.Services
         {
             _userId = userId;
         }
+        public MediaService() { }
 
         //POST
         public bool CreateMedia(MediaCreate media)
