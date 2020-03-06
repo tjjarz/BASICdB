@@ -27,4 +27,21 @@ namespace BasicDb.Models
         public string UserName { get; set; }
         public string Description { get; set; }
     }
+
+    public class ItemEdit
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int ItemId { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class ItemDetail
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int ItemId { get; set; }
+        public string Description { get; set; }
+        public string UserId { get; set; }
+    }
 }

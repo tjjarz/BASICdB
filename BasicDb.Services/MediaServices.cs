@@ -30,7 +30,7 @@ namespace BasicDb.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Medias.Add(entity);
+                ctx.Media.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -38,7 +38,7 @@ namespace BasicDb.Services
         public IEnumerable<Media> GetMedia()
         {
             var ctx = new ApplicationDbContext();
-            return ctx.Medias.ToList();
+            return ctx.Media.ToList();
         }
     }
 }
