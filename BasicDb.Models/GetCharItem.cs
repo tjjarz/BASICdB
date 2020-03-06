@@ -11,20 +11,15 @@ namespace BasicDb.Models
 {
     public class GetCharItem
     {
+        public int CharId { get; set; }
         public string Name { get; set; }
-
         public string ShortDescription { get; set; }
-
         public string Description { get; set; }
+        public int ItemId { get; set; }
+        public string ItemType { get; set; }
+        public string ItemName { get; set; }
+        public string ItemDescription { get; set; }
 
-        public List<Item> CharItems { get; set; }
-
-        //[ForeignKey(nameof(Item))]
-        //public int ItemId { get; set; }
-        //public virtual Item Item { get; set; }
-
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        //public List<Item> CharItems { get; set; }
     }
 }

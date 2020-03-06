@@ -17,15 +17,21 @@ namespace BasicDb.Services
             //_userId = userId;
         }
 
-        public bool CreateCharItem(CharItem model)
+        public bool CreateCharItem(PostCharItem model)
         {
             var entity =
                 new CharItem()
                 {
                     //UserId = _userId
+                    CharId = model.CharId,
+                    ItemId = model.ItemId
                 };
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
+                {
+                    return false;
+                }
                 ctx.CharItems.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -33,7 +39,7 @@ namespace BasicDb.Services
 
         public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
         {
-            //List<Item> ItemList = new List<Item>();
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
@@ -43,10 +49,15 @@ namespace BasicDb.Services
                     .Select
                     (e => new GetCharItem
                     {
+                        CharId = e.Character.CharId,
                         Name = e.Character.Name,
                         ShortDescription = e.Character.ShortDescription,
                         Description = e.Character.Description,
-                        CharItems = e.Character.Item  //.ToArray()
+                        ItemId = e.Item.ItemId,
+                        ItemType = e.Item.Type,
+                        ItemName = e.Item.Name,
+                        ItemDescription = e.Item.Description
+                        //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
             }

@@ -14,11 +14,26 @@ namespace BasicDb.WebAPI.Controllers
     [Authorize]
     public class CharItemController : ApiController
     {
-        private CharItemService CreateCharItemService()
+        private CharItemService CreateCharItemService() 
         {
             //string userId = Guid.Parse(User.Identity.GetUserId());
             var charItemService = new CharItemService();
             return charItemService;
+        }
+
+        public IHttpActionResult PostCharItem(PostCharItem charItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateCharItemService();
+            if (!service.CreateCharItem(charItem))
+            {
+                return InternalServerError();
+            }
+            return Ok();
         }
 
         public IHttpActionResult GetCharItems(int charId)
