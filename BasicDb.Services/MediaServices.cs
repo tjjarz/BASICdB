@@ -48,7 +48,7 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Medias.Single(e => e.MediaId == media.MediaId);
+                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId);
                 entity.MediaId = media.MediaId;
                 entity.Title = media.Title;
                 entity.Medium = media.Medium;
@@ -66,10 +66,10 @@ namespace BasicDb.Services
             {
                 var entity =
                     ctx
-                        .Medias
+                        .Media
                         .Single(e => e.MediaId == Id);
 
-                ctx.Medias.Remove(entity);
+                ctx.Media.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
