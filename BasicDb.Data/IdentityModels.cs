@@ -55,7 +55,7 @@ namespace BasicDb.Data
         public DbSet<Character> Characters { get; set; }
 
         public DbSet<CharItem> CharItems { get; set; }
-        //public DbSet<CharMedia> CharMedia { get; set; }
+        public DbSet<CharMedia> CharMedia { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -29,11 +29,12 @@ namespace BasicDb.WebAPI.Controllers
             }
 
             var service = CreateCharItemService();
-            if (!service.CreateCharItem(charItem))
+            string errorText = service.CreateCharItem(charItem);
+            if (errorText == "Character/Item Combination created")
             {
-                return InternalServerError();
+                return Ok();
             }
-            return Ok();
+            return BadRequest(errorText);
         }
 
         [HttpPut]

@@ -8,54 +8,54 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Services
 {
-    public class CharItemService
+    public class CharMediaService
     {
-        public CharItemService()
+        public CharMediaService()
         {
         }
 
-        public string CreateCharItem(PostCharItem model)
+        public string CreateCharMedia(PostCharMedia model)
         {
             var entity =
-                new CharItem()
+                new CharMedia()
                 {
                     CharId = model.CharId,
-                    ItemId = model.ItemId
+                    MediaId = model.MediaId
                 };
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.CharItems.Count(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId)
+                if (ctx.CharMedia.Count(e => e.Character.CharId == model.CharId && e.Media.MediaId == model.MediaId)
                     > 0)
                 {
                     return "Combination already exists";
                 }
-                ctx.CharItems.Add(entity);
+                ctx.CharMedia.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Item Combination created";
+                    return "Character/Media Combination created";
 
-                return "Character/Item Combination NOT created - unknown error";
+                return "Character/Media Combination NOT created - unknown error";
             }
         }
 
-        public string UpdateCharItemById(EditCharItem model)
+        public string UpdateCharMediaById(EditCharMedia model)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.CharItems.Count(e => e.CharItemId == model.CharItemId) == 0)
+                if (ctx.CharMedia.Count(e => e.CharMediaId == model.CharMediaId) == 0)
                 {
                     return "Record not found in table";
                 }
-                if (ctx.CharItems.Count(e => e.CharId == model.CharId && e.ItemId == model.ItemId) != 0)
+                if (ctx.CharMedia.Count(e => e.CharId == model.CharId && e.MediaId == model.MediaId) != 0)
                 {
                     return "Combination already exists in table";
                 }
                 var entity =
                     ctx
-                        .CharItems
-                        .Single(e => e.CharItemId == model.CharItemId);
+                        .CharMedia
+                        .Single(e => e.CharMediaId == model.CharMediaId);
 
                 entity.CharId = model.CharId;
-                entity.ItemId = model.ItemId;
+                entity.MediaId = model.MediaId;
 
                 if (ctx.SaveChanges() == 1)
                     return "Update completed";
@@ -64,20 +64,20 @@ namespace BasicDb.Services
             }
         }
 
-        public string DeleteCharItemById(int charItemId)
+        public string DeleteCharMediaById(int charMediaId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.CharItems.Count(e => e.CharItemId == charItemId) == 0)
+                if (ctx.CharMedia.Count(e => e.CharMediaId == charMediaId) == 0)
                 {
                     return "No record found to delete";
                 }
                 var entity =
                     ctx
-                    .CharItems
-                    .Single(e => e.CharItemId == charItemId);
+                    .CharMedia
+                    .Single(e => e.CharMediaId == charMediaId);
 
-                ctx.CharItems.Remove(entity);
+                ctx.CharMedia.Remove(entity);
                 if (ctx.SaveChanges() == 1)
                     return "Record Deleted";
 
@@ -85,25 +85,25 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
+        public IEnumerable<GetCharMedia> getCharMediaByCharId(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .CharItems
+                    .CharMedia
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    (e => new GetCharItem
+                    (e => new GetCharMedia
                     {
                         CharId = e.Character.CharId,
                         Name = e.Character.Name,
                         ShortDescription = e.Character.ShortDescription,
                         Description = e.Character.Description,
-                        ItemId = e.Item.ItemId,
-                        ItemType = e.Item.Type,
-                        ItemName = e.Item.Name,
-                        ItemDescription = e.Item.Description
+                        MediaId = e.Media.MediaId,
+                        Title = e.Media.Title,
+                        Medium = e.Media.Medium.ToString(),
+                        MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
