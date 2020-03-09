@@ -37,7 +37,7 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Items.Select(e => new ItemGetAll { Description = e.Description, Name = e.Name, AddedBy = e.User.UserName, Type = e.Type, ItemId = e.ItemId });
+                var query = ctx.Items.Select(e => new ItemGetAll { Name = e.Name, AddedBy = e.User.UserName, Type = e.Type, ItemId = e.ItemId });
                 return query.ToArray();
             }
         }
