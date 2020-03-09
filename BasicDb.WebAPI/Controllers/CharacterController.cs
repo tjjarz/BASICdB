@@ -17,6 +17,7 @@ namespace BasicDb.WebAPI.Controllers
         {
             CharacterService characterService = CreateCharService();
             var characters = characterService.GetCharacters();
+
             return Ok(characters);
         }
         
@@ -24,6 +25,14 @@ namespace BasicDb.WebAPI.Controllers
         {
             CharacterService characterService = CreateCharService();
             var character = characterService.GetCharById(id);
+            CharItemService charItemService = CreateCharItemService();
+            var charItems = charItemService.GetCharItemsByCharId(id);
+            character.Items = charItems.ToList();
+            /*  media listing stuff
+            MediaService mediaService = CreateMediaService();
+            var charMedia = mediaService.GetCharMediaByCharId();
+            character.Media = charMedia.ToList();
+            */
             return Ok(character);
         }/*
         public IHttpActionResult Put(NoteEdit note)
@@ -69,6 +78,20 @@ namespace BasicDb.WebAPI.Controllers
             var characterService = new CharacterService(); 
 
             return characterService;
+        }
+
+        private CharItemService CreateCharItemService()
+        {
+            var charItemService = new CharItemService();
+
+            return charItemService;
+        }
+
+        private MediaService CreateMediaService()
+        {
+            var service = new MediaService();
+
+            return service;
         }
     }
 }

@@ -24,10 +24,10 @@ namespace BasicDb.Services
                 };
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
+               /* if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
                 {
                     return false;
-                }
+                }*/
                 ctx.CharItems.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -67,7 +67,7 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
+        public IEnumerable<ItemDetail> GetCharItemsByCharId(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -76,16 +76,12 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    (e => new GetCharItem
+                    (e => new ItemDetail
                     {
-                        CharId = e.Character.CharId,
-                        Name = e.Character.Name,
-                        ShortDescription = e.Character.ShortDescription,
-                        Description = e.Character.Description,
                         ItemId = e.Item.ItemId,
-                        ItemType = e.Item.Type,
-                        ItemName = e.Item.Name,
-                        ItemDescription = e.Item.Description
+                        Name = e.Item.Name,
+                        Description = e.Item.Description,
+                        Type = e.Item.Type
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
