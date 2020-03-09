@@ -13,7 +13,8 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class CharItemController : ApiController
     {
-        private CharItemService CreateCharItemService() 
+        private CharItemService CreateCharItemService()
+
         {
             //string userId = Guid.Parse(User.Identity.GetUserId());
             var charItemService = new CharItemService();
@@ -29,15 +30,17 @@ namespace BasicDb.WebAPI.Controllers
             }
 
             var service = CreateCharItemService();
-            if (!service.CreateCharItem(charItem))
+            string errorText = service.CreateCharItem(charItem);
+            if (errorText == "Character/Item Combination created")
             {
-                return InternalServerError();
+                return Ok();
             }
-            return Ok();
+            return BadRequest(errorText);
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
+        public IHttpActionResult UpdateCharItemById(EditCharItem editCharItem)
+        // is this supposed to be this and not : public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
         {
             if (!ModelState.IsValid)
             {
@@ -45,37 +48,41 @@ namespace BasicDb.WebAPI.Controllers
             }
 
             var service = CreateCharItemService();
-            if (!service.UpdateCharItemById(charItem, editCharItem))
+            string errorText = service.UpdateCharItemById(editCharItem);
+            if (errorText == "Update completed")
             {
-                return InternalServerError();
+                return Ok();
             }
-            return Ok();
+
+            return BadRequest(errorText);
         }
 
         [HttpDelete]
         public IHttpActionResult DeleteCharItemById(int charItemId)
         {
             var service = CreateCharItemService();
-            if (!service.DeleteCharItemById(charItemId))
+            string errorText = (service.DeleteCharItemById(charItemId));
+            if (errorText == "Record Deleted")
             {
-                return InternalServerError();
+                return Ok();
             }
-            return Ok();
+            return BadRequest(errorText);
         }
 
         [HttpGet]
         public IHttpActionResult GetCharItems(int charId)
         {
             CharItemService charItemService = CreateCharItemService();
-            var charItems = charItemService.GetCharItemsByCharId(charId);
+            var charItems = charItemService.getCharItemsByCharId(charId);
             return Ok(charItems);
         }
-
+        /* this was deleted from your last commit kerry, is that intentional?
         public IEnumerable<ItemDetail> GetCharItemList(int charId)
         {
             CharItemService charItemService = CreateCharItemService();
             var charItems = charItemService.GetCharItemsByCharId(charId);
             return charItems;
         }
+        */
     }
 }
