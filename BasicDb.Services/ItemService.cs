@@ -16,7 +16,7 @@ namespace BasicDb.Services
             _userId = userId;
         }
 
-        public bool CreateItem(ItemCreate model)
+        public string CreateItem(ItemCreate model)
         {
             var entity = new Item()
             {
@@ -29,7 +29,7 @@ namespace BasicDb.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Items.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 ? "Item Created Successfully" : "Something Went Wrong";
             }
         }
 
@@ -42,46 +42,64 @@ namespace BasicDb.Services
             }
         }
 
-        public bool UpdateItem(ItemEdit model)
+        public string UpdateItem(ItemEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
+                int test = ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
+                if (ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId) > 0)
+                {
+                    var entity = ctx.Items.Single(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
 
-                entity.Name = model.Name;
-                entity.Description = model.Description;
-                entity.Type = model.Type;
+                    // maybe check here to see if the entity has a name/description/type value and return the not found here if it doesnt?
 
-                return ctx.SaveChanges() == 1;
+                    entity.Name = model.Name;
+                    entity.Description = model.Description;
+                    entity.Type = model.Type;
+
+                    return ctx.SaveChanges() == 1 ? "Updated Properly" : "Something Went Wrong";
+                }
+                // find out why this doesnt work later but for now it's fine
+                return "Item Not Found";
             }
         }
 
-        public bool DeleteItem(int itemId)
+        public string DeleteItem(int itemId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == itemId && e.AddedBy == _userId);
+                if (ctx.Items.Count(e => e.ItemId == itemId && e.AddedBy == _userId) > 0)
+                {
+                    var entity = ctx.Items.Single(e => e.ItemId == itemId && e.AddedBy == _userId);
 
-                ctx.Items.Remove(entity);
+                    ctx.Items.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                    return ctx.SaveChanges() == 1 ? "Deleted Successfully" : "Something Went Wrong";
+
+                }
+                return "Not Found";
             }
         }
 
         public ItemDetail GetItemById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Items.Single(e => e.ItemId == id);
-
-                return new ItemDetail
+                if (ctx.Items.Count(e => e.ItemId == id) > 0)
                 {
-                    ItemId = entity.ItemId,
-                    Name = entity.Name,
-                    Type = entity.Type,
-                    Description = entity.Description,
-                    AddedBy = entity.User.UserName
-                };
+                    var entity = ctx.Items.Single(e => e.ItemId == id);
+
+                    return new ItemDetail
+                    {
+                        ItemId = entity.ItemId,
+                        Name = entity.Name,
+                        Type = entity.Type,
+                        Description = entity.Description,
+                        AddedBy = entity.User.UserName
+                    };
+                }
+
+                return new ItemDetail { Name = "pbtd" };
             }
         }
     }

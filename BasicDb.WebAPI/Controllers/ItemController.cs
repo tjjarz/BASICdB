@@ -35,7 +35,7 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateItemService();
 
-            if (!service.CreateItem(item))
+            if (service.CreateItem(item) == "Something Went Wrong")
             {
                 return InternalServerError();
             }
@@ -56,6 +56,9 @@ namespace BasicDb.WebAPI.Controllers
         {
             ItemService service = CreateItemService();
             var item = service.GetItemById(id);
+            if (item.Name == "pbtd")
+                return NotFound();
+
             return Ok(item);
         }
 
@@ -69,8 +72,12 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateItemService();
 
-            if (!service.UpdateItem(item))
+            string updateMessage = service.UpdateItem(item);
+
+            if (updateMessage == "Something Went Wrong")
                 return InternalServerError();
+            else if (updateMessage == "Item Not Found")
+                return NotFound();
 
             return Ok(item);
         }
@@ -80,8 +87,14 @@ namespace BasicDb.WebAPI.Controllers
         {
             var service = CreateItemService();
 
-            if (!service.DeleteItem(id))
+            string deleteMessage = service.DeleteItem(id);
+
+            if (deleteMessage == "Something Went Wrong")
                 return InternalServerError();
+
+            // REPLACE THESE WITH BAD REQUEST TO SEND MESSAGE BACK?
+            if (deleteMessage == "Not Found")
+                return NotFound();
 
             return Ok("Successfully Deleted Item");
         }
