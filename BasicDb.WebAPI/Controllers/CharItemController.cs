@@ -21,6 +21,7 @@ namespace BasicDb.WebAPI.Controllers
             return charItemService;
         }
 
+        [HttpPost]
         public IHttpActionResult PostCharItem(PostCharItem charItem)
         {
             if (!ModelState.IsValid)
@@ -36,6 +37,7 @@ namespace BasicDb.WebAPI.Controllers
             return Ok();
         }
 
+        [HttpPut]
         public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
         {
             if (!ModelState.IsValid)
@@ -51,6 +53,7 @@ namespace BasicDb.WebAPI.Controllers
             return Ok();
         }
 
+        [HttpDelete]
         public IHttpActionResult DeleteCharItemById(int charItemId)
         {
             var service = CreateCharItemService();
@@ -61,7 +64,7 @@ namespace BasicDb.WebAPI.Controllers
             return Ok();
         }
 
-
+        [HttpGet]
         public IHttpActionResult GetCharItems(int charId)
         {
             CharItemService charItemService = CreateCharItemService();
