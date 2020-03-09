@@ -1,4 +1,5 @@
 ﻿using BasicDb.Data;
+using BasicDb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +10,87 @@ namespace BasicDb.Services
 {
     public class CharItemService
     {
-        //private readonly string _userId;
-
         public CharItemService()
         {
-            //_userId = userId;
         }
 
-        public bool CreateCharItem(CharItem model)
+        public bool CreateCharItem(PostCharItem model)
         {
             var entity =
                 new CharItem()
                 {
-                    //UserId = _userId
+                    CharId = model.CharId,
+                    ItemId = model.ItemId
                 };
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
+                {
+                    return false;
+                }
                 ctx.CharItems.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public Character getCharItemsByCharId(int charId)
+        public bool UpdateCharItemById(int charItemId, PostCharItem model)
         {
-            List<Item> ItemList = new List<Item>();
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.CharItems.Where(e => e.Character.CharId == model.CharId && e.Item.ItemId == model.ItemId) != null)
+                {
+                    return false;
+                }
+                var entity =
+                    ctx
+                        .CharItems
+                        .Single(e => e.CharItemId == charItemId);
+
+                entity.CharId = model.CharId;
+                entity.ItemId = model.ItemId;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteCharItemById(int charItemId)
+        {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
+                    .CharItems
+                    .Single(e => e.CharItemId == charItemId);
+
+                ctx.CharItems.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+<<<<<<< HEAD
+                    .CharItems
+                    .Where(e => e.Character.CharId == charId)
+                    .Select
+                    (e => new GetCharItem
+                    {
+                        CharId = e.Character.CharId,
+                        Name = e.Character.Name,
+                        ShortDescription = e.Character.ShortDescription,
+                        Description = e.Character.Description,
+                        ItemId = e.Item.ItemId,
+                        ItemType = e.Item.Type,
+                        ItemName = e.Item.Name,
+                        ItemDescription = e.Item.Description
+                        //CharItems = e.Character.Item
+                    });
+                return entity.ToArray();
+=======
                     .Characters
                     .Single(e => e.CharId == charId);
                 return new Character
@@ -46,6 +100,7 @@ namespace BasicDb.Services
                     Description = entity.Description//,
                     //CharItems = entity.CharItems
                 };
+>>>>>>> dev
             }
         }
     }
