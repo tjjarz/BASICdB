@@ -13,18 +13,21 @@ namespace BasicDb.Data
         //[Key]
         //public int CharItemID { get; set; }
 
-
+<<<<<<< HEAD
         ////public List<Character> Characters { get; set; }
 
         ////public List<Item> Items { get; set; }
 
         public int CharItemId { get; set; }
+=======
 
         //FIXIT! Doesn't Seem right...
         //public List<Character> Characters { get; set; }
 
         //public List<Item> Items { get; set; }
 
+
+>>>>>>> dev
 
         [ForeignKey(nameof(Character))]
         public int CharId { get; set; }
@@ -33,10 +36,14 @@ namespace BasicDb.Data
         [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }
         public virtual Item Item { get; set; }
+<<<<<<< HEAD
+=======
 
   /* on dev but not on kerry update?
         public List<Character> Characters { get; set; }
 
         public List<Item> Items { get; set; }*/
+
+>>>>>>> dev
     }
 }
