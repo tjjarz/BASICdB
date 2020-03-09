@@ -67,8 +67,15 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetCharItems(int charId)
         {
             CharItemService charItemService = CreateCharItemService();
-            var charItems = charItemService.getCharItemsByCharId(charId);
+            var charItems = charItemService.GetCharItemsByCharId(charId);
             return Ok(charItems);
+        }
+
+        public IEnumerable<ItemDetail> GetCharItemList(int charId)
+        {
+            CharItemService charItemService = CreateCharItemService();
+            var charItems = charItemService.GetCharItemsByCharId(charId);
+            return charItems;
         }
     }
 }

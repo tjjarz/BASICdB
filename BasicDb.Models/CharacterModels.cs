@@ -36,12 +36,8 @@ namespace BasicDb.Models
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
-
-        //saved for later
-        //public virtual List<Item> Item { get; set; }
-        //public virtual List<Media> Media { get; set; }
-        //public string UserId { get; set; }
-
+        public List<ItemDetail> Items { get; set; }
+        //public List<Media> Media { get; set; }
     }
 
     public class CharListItem

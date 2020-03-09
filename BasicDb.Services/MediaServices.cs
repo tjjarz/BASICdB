@@ -37,7 +37,7 @@ namespace BasicDb.Services
         }
 
         //GET
-        public IEnumerable<Media> GetMedia()
+        public List<Media> GetMedia()
         {
             var ctx = new ApplicationDbContext();
             return ctx.Media.ToList();
