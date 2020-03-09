@@ -14,18 +14,19 @@ namespace BasicDb.Data
         public int ItemId { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Type { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        public virtual List<CharItem> CharItems { get; set; }
+        // add created DateTime
+        // add updated DateTime
 
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
+        public string AddedBy { get; set; }
+        [ForeignKey(nameof(AddedBy))]
         public virtual ApplicationUser User { get; set; }
 
     }

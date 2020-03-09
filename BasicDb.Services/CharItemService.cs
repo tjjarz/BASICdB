@@ -73,6 +73,7 @@ namespace BasicDb.Services
             {
                 var entity =
                     ctx
+<<<<<<< HEAD
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
@@ -89,6 +90,17 @@ namespace BasicDb.Services
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
+=======
+                    .Characters
+                    .Single(e => e.CharId == charId);
+                return new Character
+                {
+                    Name = entity.Name,
+                    ShortDescription = entity.ShortDescription,
+                    Description = entity.Description//,
+                    //CharItems = entity.CharItems
+                };
+>>>>>>> dev
             }
         }
     }

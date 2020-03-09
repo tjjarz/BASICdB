@@ -13,8 +13,8 @@ namespace BasicDb.Data
         [Key]
         public int CharMediaID { get; set; }
 
-        //public List<Character> Characters { get; set; }
+        public List<Character> Characters { get; set; }
 
-        //public List<Media> Media { get; set; }
+        public List<Media> Media { get; set; }
     }
 }

@@ -11,7 +11,6 @@ using System.Web.Http;
 
 namespace BasicDb.WebAPI.Controllers
 {
-    [Authorize]
     public class CharItemController : ApiController
     {
         private CharItemService CreateCharItemService() 
