@@ -102,7 +102,6 @@
     <Compile Include="Migrations\202003061519449_EditedItems.designer.cs">
       <DependentUpon>202003061519449_EditedItems.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Migrations\202003071508258_newDevPullSaturday.cs" />
     <Compile Include="Migrations\202003071508258_newDevPullSaturday.designer.cs">
       <DependentUpon>202003071508258_newDevPullSaturday.cs</DependentUpon>
@@ -111,8 +110,6 @@
     <Compile Include="Migrations\202003091331221_somethingHappened.designer.cs">
       <DependentUpon>202003091331221_somethingHappened.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> parent of 24d4624... commiting csproj deletion
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,15 +124,12 @@
     <EmbeddedResource Include="Migrations\202003061519449_EditedItems.resx">
       <DependentUpon>202003061519449_EditedItems.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\202003071508258_newDevPullSaturday.resx">
       <DependentUpon>202003071508258_newDevPullSaturday.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003091331221_somethingHappened.resx">
       <DependentUpon>202003091331221_somethingHappened.cs</DependentUpon>
     </EmbeddedResource>
-=======
->>>>>>> parent of 24d4624... commiting csproj deletion
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
