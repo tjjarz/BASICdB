@@ -64,6 +64,8 @@
 
     <Compile Include="MediaServices.cs" />
 
+    <Compile Include="CharItemService.cs"/>
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
