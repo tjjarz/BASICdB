@@ -94,23 +94,6 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003060051074_FreshMigration.cs" />
-    <Compile Include="Migrations\202003060051074_FreshMigration.designer.cs">
-      <DependentUpon>202003060051074_FreshMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003061519449_EditedItems.cs" />
-    <Compile Include="Migrations\202003061519449_EditedItems.designer.cs">
-      <DependentUpon>202003061519449_EditedItems.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003071508258_newDevPullSaturday.cs" />
-    <Compile Include="Migrations\202003071508258_newDevPullSaturday.designer.cs">
-      <DependentUpon>202003071508258_newDevPullSaturday.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003091331221_somethingHappened.cs" />
-    <Compile Include="Migrations\202003091331221_somethingHappened.designer.cs">
-      <DependentUpon>202003091331221_somethingHappened.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,18 +101,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003060051074_FreshMigration.resx">
-      <DependentUpon>202003060051074_FreshMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003061519449_EditedItems.resx">
-      <DependentUpon>202003061519449_EditedItems.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003071508258_newDevPullSaturday.resx">
-      <DependentUpon>202003071508258_newDevPullSaturday.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003091331221_somethingHappened.resx">
-      <DependentUpon>202003091331221_somethingHappened.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
