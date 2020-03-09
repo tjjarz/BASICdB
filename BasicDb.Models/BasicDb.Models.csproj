@@ -60,6 +60,9 @@
     <Compile Include="CharacterModels.cs" />
     <Compile Include="ItemModels.cs" />
     <Compile Include="MediaModels.cs" />
+    <Compile Include="CharItemModels.cs" />
+    <Compile Include="EditCharItem.cs" />
+    <Compile Include="PostCharItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

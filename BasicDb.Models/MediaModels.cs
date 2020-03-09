@@ -11,10 +11,7 @@ namespace BasicDb.Models
     //POST
     public class MediaCreate
     {
-
         public int MediaId { get; set; }
-
-        [Required]
         public string Title { get; set; }
         public MediaType Medium { get; set; }
         public string Description { get; set; }
@@ -29,6 +26,7 @@ namespace BasicDb.Models
         public string Description { get; set; }
     }
 
+    //UPDATE
     public class MediaUpdate
     {
         public int MediaId { get; set; }

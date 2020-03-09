@@ -15,7 +15,6 @@ namespace BasicDb.Data
 
         [Required]
         public string Name { get; set; }
-
         /*
         [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }*/
@@ -23,11 +22,18 @@ namespace BasicDb.Data
         /*
         [ForeignKey(nameof(Media))]
 
+
         public int MediaId { get; set; }*/
         public virtual List<Media> Media { get; set; }
 
+        /*    removed from Kerry submission
+
+               public virtual List<Character> Media { get; set; }*/
+
+        //public int MediaId { get; set; }
+        //public virtual List<Media> Media { get; set; }
+
  /*    removed from Kerry submission
-        
         public virtual List<Character> Media { get; set; }*/
 
 
@@ -36,6 +42,15 @@ namespace BasicDb.Data
 
         public string Description { get; set; }
 
+
+        //[ForeignKey(nameof(User))]
+
+        //public string UserId { get; set; }
+        ////public Guid UserId { get; set; }
+
+        //public virtual ApplicationUser User { get; set; }
+
+
         //[ForeignKey(nameof(User))]
         public string UserId { get; set; }
         //public Guid UserId { get; set; }
@@ -43,6 +58,7 @@ namespace BasicDb.Data
         public virtual ApplicationUser User { get; set; }
 
         // add created and updated datetimes!
+
 
     }
 }

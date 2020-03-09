@@ -64,6 +64,8 @@
 
     <Compile Include="MediaServices.cs" />
 
+    <Compile Include="CharItemService.cs"/>
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,8 +82,6 @@
       <Project>{ef07a7ab-93df-4daa-b4a0-83502d308857}</Project>
       <Name>BasicDb.Models</Name>
     </ProjectReference>
-
-
 
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
