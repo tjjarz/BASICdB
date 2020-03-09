@@ -59,6 +59,7 @@ namespace BasicDb.Services
             {
                 var entity =
                     ctx
+//<<<<<<< kerry
                     .CharItems
                     .Single(e => e.CharItemId == charItemId);
 
@@ -73,7 +74,7 @@ namespace BasicDb.Services
             {
                 var entity =
                     ctx
-<<<<<<< HEAD
+//<<<<<<< HEAD
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
@@ -90,7 +91,8 @@ namespace BasicDb.Services
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
-=======
+
+//>>>>>>> dev
                     .Characters
                     .Single(e => e.CharId == charId);
                 return new Character
@@ -100,7 +102,6 @@ namespace BasicDb.Services
                     Description = entity.Description//,
                     //CharItems = entity.CharItems
                 };
->>>>>>> dev
             }
         }
     }
