@@ -63,7 +63,8 @@ namespace BasicDb.Services
                         CharId = entity.CharId,
                         Name = entity.Name,
                         ShortDescription = entity.ShortDescription,
-                        Description = entity.Description
+                        Description = entity.Description,
+                        AddedBy = entity.User.UserName
                         //will need lists and user here too eventually
                     };
             }

@@ -25,6 +25,7 @@ namespace BasicDb.WebAPI.Controllers
         {
             CharacterService characterService = CreateCharService();
             var character = characterService.GetCharById(id);
+            //character.AddedBy = characterService.
             CharItemService charItemService = CreateCharItemService();
             var charItems = charItemService.GetCharItemList(id);
             character.Items = charItems.ToList();
