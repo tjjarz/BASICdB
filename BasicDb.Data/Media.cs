@@ -19,7 +19,7 @@ namespace BasicDb.Data
         public string Title { get; set; }
 
         [Required]
-        public MediaType Medium { get; set; }
+        public string MediaType { get; set; }
 
         [Required]
         public string Description { get; set; }

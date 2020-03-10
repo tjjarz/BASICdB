@@ -25,7 +25,7 @@ namespace BasicDb.Services
                 {
                     MediaId = media.MediaId,
                     Title = media.Title,
-                    Medium = media.Medium,
+                    MediaType = media.MediaType,
                     Description = media.Description
                 };
 
@@ -51,7 +51,7 @@ namespace BasicDb.Services
                 var entity = ctx.Media.Single(e => e.MediaId == media.MediaId);
                 entity.MediaId = media.MediaId;
                 entity.Title = media.Title;
-                entity.Medium = media.Medium;
+                entity.MediaType = media.MediaType;
                 entity.Description = media.Description;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
