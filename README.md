@@ -74,7 +74,7 @@ no input required
         "MediaId": 2,
         "Title": "Goblet of Fire",
         "Medium": 5,
-        "Description": "Harry Potter and the Goblet of Fire, the fourth(?) book",
+        "Description": "Harry Potter and the Goblet of Fire, the fourth book",
         "UserId": null
     }
 ]
@@ -87,7 +87,7 @@ no input required
 MediaId:1
 Title:Goblet of Fire
 Medium:5
-Description:Harry Potter and the Goblet of Fire, the fourth(?) book
+Description:Harry Potter and the Goblet of Fire, the fourth book
 ```
 *Expected Output:*
 ```
@@ -133,7 +133,7 @@ no input expected
         "CharId": 2,
         "Name": "Hermione Granger",
         "ShortDescription": "Hermione Granger of Gryffindor",
-        "Description": "Hermione is the smart student in the main bunch",
+        "Description": "Bushy of hair and brilliant of brains.",
         "UserId": null
     }
 ]
