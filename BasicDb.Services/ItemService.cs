@@ -16,11 +16,11 @@ namespace BasicDb.Services
             _userId = userId;
         }
 
-        public bool CreateItem(ItemCreate model)
+        public string CreateItem(ItemCreate model)
         {
             var entity = new Item()
             {
-                UserId = _userId,
+                AddedBy = _userId,
                 Type = model.Type,
                 Name = model.Name,
                 Description = model.Description
@@ -29,7 +29,7 @@ namespace BasicDb.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Items.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 ? "Item Created Successfully" : "Something Went Wrong";
             }
         }
 
@@ -37,8 +37,69 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Items.Select(e => new ItemGetAll { Description = e.Description, Name = e.Name, UserName = e.User.UserName, Type = e.Type });
+                var query = ctx.Items.Select(e => new ItemGetAll { Name = e.Name, AddedBy = e.User.UserName, Type = e.Type, ItemId = e.ItemId });
                 return query.ToArray();
+            }
+        }
+
+        public string UpdateItem(ItemEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                int test = ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
+                if (ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId) > 0)
+                {
+                    var entity = ctx.Items.Single(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
+
+                    // maybe check here to see if the entity has a name/description/type value and return the not found here if it doesnt?
+
+                    entity.Name = model.Name;
+                    entity.Description = model.Description;
+                    entity.Type = model.Type;
+
+                    return ctx.SaveChanges() == 1 ? "Updated Properly" : "Something Went Wrong";
+                }
+                // find out why this doesnt work later but for now it's fine
+                return "Item Not Found";
+            }
+        }
+
+        public string DeleteItem(int itemId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.Items.Count(e => e.ItemId == itemId && e.AddedBy == _userId) > 0)
+                {
+                    var entity = ctx.Items.Single(e => e.ItemId == itemId && e.AddedBy == _userId);
+
+                    ctx.Items.Remove(entity);
+
+                    return ctx.SaveChanges() == 1 ? "Deleted Successfully" : "Something Went Wrong";
+
+                }
+                return "Not Found";
+            }
+        }
+
+        public ItemDetail GetItemById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.Items.Count(e => e.ItemId == id) > 0)
+                {
+                    var entity = ctx.Items.Single(e => e.ItemId == id);
+
+                    return new ItemDetail
+                    {
+                        ItemId = entity.ItemId,
+                        Name = entity.Name,
+                        Type = entity.Type,
+                        Description = entity.Description,
+                        AddedBy = entity.User.UserName
+                    };
+                }
+
+                return new ItemDetail { Name = "pbtd" };
             }
         }
     }

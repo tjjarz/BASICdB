@@ -38,6 +38,8 @@ namespace BasicDb.Services
         public IEnumerable<Character> GetCharacters()
         {
             var ctx = new ApplicationDbContext();
+
+
             return ctx.Characters.ToArray();
 
             /*

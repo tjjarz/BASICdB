@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasicDb.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,30 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicDb.Data
+namespace BasicDb.Models
 {
-    public class Character
-    {
-        [Key]
+    public class GetCharItem
+    { 
         public int CharId { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
-        public virtual List<Item> Item { get; set; }
-
-        public virtual List<Media> Media { get; set; }
-
-        [Required]
         public string ShortDescription { get; set; }
-
+        public string ItemDescription { get; set; }
         public string Description { get; set; }
-
-        public string UserId { get; set; }
-
-        public virtual ApplicationUser User { get; set; }
-
-        // add created and updated datetimes
-
+        public int ItemId { get; set; }
+        public string ItemType { get; set; }
+        public string ItemName { get; set; }
     }
+
 }

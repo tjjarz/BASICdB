@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.csproj
 
 #adding this to help resolve some obnoxious merge issues
 *.csproj
@@ -341,3 +342,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+*.csproj
