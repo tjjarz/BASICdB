@@ -29,6 +29,16 @@ namespace BasicDb.Services
                 {
                     return "Combination already exists";
                 }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId)
+                    == 0)
+                {
+                    return $"Invalid Media ID - Media ID {model.MediaId} doesn't exist";
+                }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId)
+                    == 0)
+                {
+                    return $"Invalid Character ID - Character ID {model.CharId} doesn't exist";
+                }
                 ctx.CharMedia.Add(entity);
                 if (ctx.SaveChanges() == 1)
                     return "Character/Media Combination created";
@@ -48,6 +58,16 @@ namespace BasicDb.Services
                 if (ctx.CharMedia.Count(e => e.CharId == model.CharId && e.MediaId == model.MediaId) != 0)
                 {
                     return "Combination already exists in table";
+                }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId)
+                    == 0)
+                {
+                    return $"Invalid Media ID - Media ID {model.MediaId} doesn't exist";
+                }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId)
+                    == 0)
+                {
+                    return $"Invalid Character ID - Character ID {model.CharId} doesn't exist";
                 }
                 var entity =
                     ctx
@@ -102,7 +122,7 @@ namespace BasicDb.Services
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Title,
-                        Medium = e.Media.Medium.ToString(),
+                        MediaType = e.Media.MediaType,
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });
