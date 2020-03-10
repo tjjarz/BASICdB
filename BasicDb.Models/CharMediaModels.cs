@@ -14,7 +14,7 @@ namespace BasicDb.Models
         public string Description { get; set; }
         public int MediaId { get; set; }
         public string Title { get; set; }
-        public string Medium { get; set; }
+        public string MediaType { get; set; }
         public string MediaDescription { get; set; }
     }
 }
