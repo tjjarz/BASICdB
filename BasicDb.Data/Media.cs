@@ -24,6 +24,9 @@ namespace BasicDb.Data
 
         public string AddedBy { get; set; }
 
+        [Required]
+        public DateTimeOffset CreatedUtc { get; set; }
+
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

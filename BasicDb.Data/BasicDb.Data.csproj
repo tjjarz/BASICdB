@@ -94,13 +94,13 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003101404326_UpdateMedia.cs" />
-    <Compile Include="Migrations\202003101404326_UpdateMedia.Designer.cs">
-      <DependentUpon>202003101404326_UpdateMedia.cs</DependentUpon>
+    <Compile Include="Migrations\202003101610006_migration.cs" />
+    <Compile Include="Migrations\202003101610006_migration.designer.cs">
+      <DependentUpon>202003101610006_migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003101431011_FixMediaAgain.cs" />
-    <Compile Include="Migrations\202003101431011_FixMediaAgain.designer.cs">
-      <DependentUpon>202003101431011_FixMediaAgain.cs</DependentUpon>
+    <Compile Include="Migrations\202003101726395_migration1.cs" />
+    <Compile Include="Migrations\202003101726395_migration1.designer.cs">
+      <DependentUpon>202003101726395_migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,11 +110,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003101404326_UpdateMedia.resx">
-      <DependentUpon>202003101404326_UpdateMedia.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003101610006_migration.resx">
+      <DependentUpon>202003101610006_migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003101431011_FixMediaAgain.resx">
-      <DependentUpon>202003101431011_FixMediaAgain.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003101726395_migration1.resx">
+      <DependentUpon>202003101726395_migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
