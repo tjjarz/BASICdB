@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Data
 {
-    public class Character
+    public class Character : Entry
     {
         [Key]
         public int CharId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        //[Required]
+        //public string Name { get; set; }
 
         public virtual List<Item> Item { get; set; }
 
@@ -25,7 +25,7 @@ namespace BasicDb.Data
 
         public string Description { get; set; }
 
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
