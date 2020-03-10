@@ -15,6 +15,7 @@ namespace BasicDb.Models
         public string Title { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
+        public string AddedBy { get; set; }
     }
     
     //GET
@@ -24,6 +25,7 @@ namespace BasicDb.Models
         public string Title { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
+        public string AddedBy { get; set; }
     }
 
     //UPDATE
@@ -33,6 +35,10 @@ namespace BasicDb.Models
         public string Title { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
+        public string AddedBy { get; set; }
+
+        [Display(Name = "Created")]
+        public DateTimeOffset CreatedUtc { get; set; }
     }
     /*
     public class MediaDetail

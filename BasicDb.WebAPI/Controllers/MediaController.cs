@@ -19,6 +19,12 @@ namespace BasicDb.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+
+            if (ModelState == null)
+            {
+                return BadRequest("Could not post");
+            }
+
             var service = CreateMediaService();
 
             if (!service.CreateMedia(media))
