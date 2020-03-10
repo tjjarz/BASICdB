@@ -86,7 +86,7 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<GetCharItem> getCharItemsByCharId(int charId)
+        public IEnumerable<GetCharItem> GetCharItemsByCharId(int charId)
 
         {
             using (var ctx = new ApplicationDbContext())
@@ -96,16 +96,16 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-//                    .Characters
-//                    .Single(e => e.CharId == charId);
-//                return new Character
-//                {
-//                    Name = entity.Name,
-//                    ShortDescription = entity.ShortDescription,
-//                    Description = entity.Description//,
-//                    //CharItems = entity.CharItems
-//                };
-//>>>>>>> dev
+                    //                    .Characters
+                    //                    .Single(e => e.CharId == charId);
+                    //                return new Character
+                    //                {
+                    //                    Name = entity.Name,
+                    //                    ShortDescription = entity.ShortDescription,
+                    //                    Description = entity.Description//,
+                    //                    //CharItems = entity.CharItems
+                    //                };
+                    //>>>>>>> dev
                     (e => new GetCharItem
                     {
                         CharId = e.Character.CharId,
@@ -116,6 +116,27 @@ namespace BasicDb.Services
                         ItemType = e.Item.Type,
                         ItemName = e.Item.Name,
                         ItemDescription = e.Item.Description
+                        //CharItems = e.Character.Item
+                    });
+                return entity.ToArray();
+            }
+        }
+        //newwer betterer get charitems list
+        public IEnumerable<ItemDetail> GetCharItemList(int charId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharItems
+                    .Where(e => e.Character.CharId == charId)
+                    .Select
+                    (e => new ItemDetail
+                    {
+                        ItemId = e.Item.ItemId,
+                        Name = e.Item.Name,
+                        Description = e.Item.Description,
+                        Type = e.Item.Type
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
