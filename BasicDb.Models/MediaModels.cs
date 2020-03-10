@@ -11,6 +11,7 @@ namespace BasicDb.Models
     //POST
     public class MediaCreate
     {
+        public int MediaId { get; set; }
         public string Title { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
@@ -18,14 +19,6 @@ namespace BasicDb.Models
     
     //GET
     public class MediaGet
-    {
-        public int MediaId { get; set; }
-        public string Title { get; set; }
-        public string MediaType { get; set; }
-        public string Description { get; set; }
-    }
-    
-    public class MediaDetail
     {
         public int MediaId { get; set; }
         public string Title { get; set; }
@@ -41,4 +34,14 @@ namespace BasicDb.Models
         public string MediaType { get; set; }
         public string Description { get; set; }
     }
+    /*
+    public class MediaDetail
+    {
+        public int MediaId { get; set; }
+        public string Title { get; set; }
+        public MediaType Medium { get; set; }
+        public string Description { get; set; }
+    }*/
+
+    
 }

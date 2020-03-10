@@ -38,7 +38,6 @@ namespace BasicDb.Models
         public string Description { get; set; }
         public List<ItemDetail> Items { get; set; }
         //public List<Media> Media { get; set; }
-        //public string AddedBy { get; set; }
     }
 
     public class CharListItem

@@ -18,12 +18,12 @@ namespace BasicDb.Services
         public MediaService() { }
 
         //POST
-        public string CreateMedia(MediaCreate media)
+        public bool CreateMedia(MediaCreate media)
         {
             var entity =
                 new Media()
                 {
-                    AddedBy = _userId,
+                    MediaId = media.MediaId,
                     Title = media.Title,
                     MediaType = media.MediaType,
                     Description = media.Description
@@ -32,7 +32,7 @@ namespace BasicDb.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Media.Add(entity);
-                return ctx.SaveChanges() == 1 ? "Media has been created": "Media was not able to be created";
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -43,29 +43,8 @@ namespace BasicDb.Services
             return ctx.Media.ToList();
         }
 
-        public MediaDetail GetMediaById(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                if (ctx.Media.Count(e => e.MediaId == id) > 0)
-                {
-                    var entity = ctx.Media.Single(e => e.MediaId == id);
-
-                    return new MediaDetail
-                    {
-                        MediaId = entity.MediaId,
-                        Title = entity.Title,
-                        MediaType = entity.MediaType,
-                        Description = entity.Description,
-                    };
-                }
-
-                return new MediaDetail();
-            }
-        }
-
         //UPDATE
-        public string UpdateMedia(MediaUpdate media)
+        public bool UpdateMedia(MediaUpdate media)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -76,12 +55,12 @@ namespace BasicDb.Services
                 entity.Description = media.Description;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1 ? "Media has been updated ": "Media was not updated";
+                return ctx.SaveChanges() == 1;
             }
         }
 
         //DELETE
-        public string DeleteMedia(int Id)
+        public bool DeleteMedia(int Id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -92,7 +71,7 @@ namespace BasicDb.Services
 
                 ctx.Media.Remove(entity);
 
-                return ctx.SaveChanges() == 1 ? "Successfully deleted media": "Unsuccessful deletion of media";
+                return ctx.SaveChanges() == 1;
             }
         }
     }
