@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasicDb.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,10 +31,10 @@ namespace BasicDb.Models
 
     }
 
-    public class CharDetail
+    public class CharDetail : Entry
     {
         public int CharId { get; set; }
-        public string Name { get; set; }
+        //public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
         public List<ItemDetail> Items { get; set; }
