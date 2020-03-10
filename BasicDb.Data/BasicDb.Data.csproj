@@ -94,13 +94,21 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
+    <Compile Include="Migrations\202003101404326_UpdateMedia.cs" />
+    <Compile Include="Migrations\202003101404326_UpdateMedia.Designer.cs">
+      <DependentUpon>202003101404326_UpdateMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003101431011_FixMediaAgain.cs" />
+    <Compile Include="Migrations\202003101431011_FixMediaAgain.designer.cs">
+      <DependentUpon>202003101431011_FixMediaAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
