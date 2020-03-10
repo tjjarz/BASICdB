@@ -133,7 +133,7 @@ no input expected
         "CharId": 2,
         "Name": "Hermione Granger",
         "ShortDescription": "Hermione Granger of Gryffindor",
-        "Description": "Bushy of hair and brilliant of brains.",
+        "Description": "A bushy-haired witch of great intellect.",
         "UserId": null
     }
 ]
@@ -151,7 +151,7 @@ no input expected
     "CharId": 2,
     "Name": "Hermione Granger",
     "ShortDescription": "Hermione Granger of Gryffindor",
-    "Description": "Hermione is the smart student in the main bunch"
+    "Description": "A bushy-haired witch of great intellect"
 }
 ```
 \
@@ -161,7 +161,7 @@ no input expected
 ```
 Name:Hermione Granger
 ShortDescription:Hermione Granger of Gryffindor
-Description:Hermione is the smart student in the main bunch
+Description:A bushy-haired witch of great intellect
 ```
 *Expected Output:*
 ```
