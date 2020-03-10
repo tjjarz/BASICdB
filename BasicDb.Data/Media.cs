@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Data
 {
+    public enum MediaType { Movie = 0, Comic, Book, Show, Play, Podcast }
+
     public class Media
     {
         [Key]
@@ -21,6 +23,7 @@ namespace BasicDb.Data
 
         [Required]
         public string Description { get; set; }
+
 
         public string AddedBy { get; set; }
 

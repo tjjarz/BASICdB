@@ -18,12 +18,12 @@ namespace BasicDb.Services
         public MediaService() { }
 
         //POST
-        public string CreateMedia(MediaCreate media)
+        public bool CreateMedia(MediaCreate media)
         {
             var entity =
                 new Media()
                 {
-                    AddedBy = _userId,
+                    MediaId = media.MediaId,
                     Title = media.Title,
                     MediaType = media.MediaType,
                     Description = media.Description,
@@ -33,7 +33,7 @@ namespace BasicDb.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Media.Add(entity);
-                return ctx.SaveChanges() == 1 ? "Media has been created": "Media was not able to be created";
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -47,6 +47,7 @@ namespace BasicDb.Services
             }
 
         }
+
 
         public MediaDetail GetMediaById(int id)
         {
@@ -72,6 +73,7 @@ namespace BasicDb.Services
 
         //UPDATE
         public string UpdateMedia(MediaUpdate model)
+
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -82,12 +84,12 @@ namespace BasicDb.Services
                 entity.Description = model.Description;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1 ? "Media has been updated ": "Media was not updated";
+                return ctx.SaveChanges() == 1;
             }
         }
 
         //DELETE
-        public string DeleteMedia(int Id)
+        public bool DeleteMedia(int Id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -98,7 +100,7 @@ namespace BasicDb.Services
 
                 ctx.Media.Remove(entity);
 
-                return ctx.SaveChanges() == 1 ? "Successfully deleted media": "Unsuccessful deletion of media";
+                return ctx.SaveChanges() == 1;
             }
         }
     }
