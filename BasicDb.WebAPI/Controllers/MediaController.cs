@@ -34,9 +34,11 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(media);
         }
 
+        [Authorize]
         private MediaService CreateMediaService()
         {
-            var mediaService = new MediaService();
+            var userId = User.Identity.GetUserId();
+            var mediaService = new MediaService(userId);
             return mediaService;
         }
 

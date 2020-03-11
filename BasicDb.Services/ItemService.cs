@@ -23,7 +23,9 @@ namespace BasicDb.Services
                 AddedBy = _userId,
                 Type = model.Type,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -95,7 +97,7 @@ namespace BasicDb.Services
                         Name = entity.Name,
                         Type = entity.Type,
                         Description = entity.Description,
-                        AddedBy = entity.User.UserName
+                        AddedBy = entity.AddedBy
                     };
                 }
 

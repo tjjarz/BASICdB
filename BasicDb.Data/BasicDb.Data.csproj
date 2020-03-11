@@ -91,6 +91,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="CharItem.cs" />
     <Compile Include="CharMedia.cs" />
+    <Compile Include="Entry.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />

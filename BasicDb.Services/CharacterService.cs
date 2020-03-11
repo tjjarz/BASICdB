@@ -25,7 +25,9 @@ namespace BasicDb.Services
                     Name = character.Name,
                     ShortDescription = character.ShortDescription,
                     Description = character.Description,
-                    UserId = _userId
+                    AddedBy = _userId,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now
                     //CreatedUtc = DateTimeOffset.Now
                 };
             using (var ctx = new ApplicationDbContext())
@@ -67,7 +69,11 @@ namespace BasicDb.Services
                         CharId = entity.CharId,
                         Name = entity.Name,
                         ShortDescription = entity.ShortDescription,
-                        Description = entity.Description
+                        Description = entity.Description,
+                        CreatedOn = entity.CreatedOn,
+                        ModifiedOn = entity.ModifiedOn,
+                        AddedBy = entity.User.UserName
+
                         //will need lists and user here too eventually
                     };
             }
@@ -81,12 +87,12 @@ namespace BasicDb.Services
                 entity.Name = character.Name;
                 entity.ShortDescription = character.ShortDescription;
                 entity.Description = character.Description;
-                //entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                entity.ModifiedOn = DateTime.Now;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteChar(int id)
+        public bool DeleteCharacter(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {

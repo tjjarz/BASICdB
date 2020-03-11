@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Data
 {
-    public class Media
+    public class Media : Entry
     {
         [Key]
         public int MediaId { get; set; }
 
-        [Required]
-        public string Title { get; set; }
+        //[Required]
+        //public string Name { get; set; }  //now getting Name From entry
 
         [Required]
         public string MediaType { get; set; }
@@ -22,14 +22,10 @@ namespace BasicDb.Data
         [Required]
         public string Description { get; set; }
 
-
-        public string AddedBy { get; set; }
-
-        [Required]
-        public DateTimeOffset CreatedUtc { get; set; }
-
+        //public string AddedBy { get; set; }
+        /*
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }*/
     }
 }

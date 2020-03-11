@@ -67,7 +67,7 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetCharMedia(int charId)
         {
             CharMediaService charMediaService = CreateCharMediaService();
-            var charMedia = charMediaService.getCharMediaByCharId(charId);
+            var charMedia = charMediaService.GetCharMediaByCharId(charId);
             return Ok(charMedia);
         }
     }

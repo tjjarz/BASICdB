@@ -85,7 +85,7 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<GetCharMedia> getCharMediaByCharId(int charId)
+        public IEnumerable<GetCharMedia> GetCharMediaByCharId(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -101,10 +101,30 @@ namespace BasicDb.Services
                         ShortDescription = e.Character.ShortDescription,
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
-                        Title = e.Media.Title,
+                        Title = e.Media.Name,
                         Medium = e.Media.Medium.ToString(),
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
+                    });
+                return entity.ToArray();
+            }
+        }
+
+        public IEnumerable<MediaShort> GetCharMediaList(int charId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharMedia
+                    .Where(e => e.Character.CharId == charId)
+                    .Select
+                    (e => new MediaShort
+                    {
+                        MediaId = e.Media.MediaId,
+                        Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
+                        //Description = e.Media.Description,
+                        MediaType = e.Media.MediaType
                     });
                 return entity.ToArray();
             }

@@ -15,7 +15,6 @@ namespace BasicDb.Services
         {
             _userId = userId;
         }
-        public MediaService() { }
 
         //POST
         public string CreateMedia(MediaCreate media)
@@ -24,9 +23,11 @@ namespace BasicDb.Services
                 new Media()
                 {
                     AddedBy = _userId,
-                    Title = media.Title,
+                    Name = media.Name,
                     MediaType = media.MediaType,
-                    Description = media.Description
+                    Description = media.Description,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -59,7 +60,7 @@ namespace BasicDb.Services
                     return new MediaGet
                     {
                         MediaId = entity.MediaId,
-                        Title = entity.Title,
+                        Title = entity.Name,
                         MediaType = entity.MediaType,
                         Description = entity.Description,
                     };
@@ -76,7 +77,7 @@ namespace BasicDb.Services
             {
                 var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
-                entity.Title = media.Title;
+                entity.Name = media.Title;
                 entity.MediaType = media.MediaType;
                 entity.Description = media.Description;
                 entity.AddedBy = media.AddedBy;

@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Models
 {
+    //should probably add some consitency to whether we call the primary property Title or Name here (though the actual data is stored as .Name)
     //POST
     public class MediaCreate
     {
         public int MediaId { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }  
         public string MediaType { get; set; }
         public string Description { get; set; }
         public string AddedBy { get; set; }
@@ -39,5 +40,12 @@ namespace BasicDb.Models
 
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
+    }
+
+    public class MediaShort
+    {
+        public int MediaId { get; set; }
+        public string Title { get; set; }
+        public string MediaType { get; set; }
     }
 }

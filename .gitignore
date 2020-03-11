@@ -13,6 +13,7 @@
 
 #adding this to help resolve some obnoxious merge issues
 *.csproj
+BasicDb.Data/Migrations
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
