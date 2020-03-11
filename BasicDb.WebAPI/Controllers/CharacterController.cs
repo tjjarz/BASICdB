@@ -12,87 +12,74 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class CharacterController : ApiController
     {
-        [Authorize]
+        //returns a list of all characters as CharListItem
         public IHttpActionResult Get()
         {
             CharacterService characterService = CreateCharService();
-            var characters = characterService.GetCharacters();
+            var characterList = characterService.GetCharacters();
 
-            return Ok(characters);
+            return Ok(characterList);
         }
-        
-        public IHttpActionResult Get(int id)
+
+        //Get character by CharId (returns as CharDetail)
+        public IHttpActionResult Get(int charId)
         {
+            //init services for queries
             CharacterService characterService = CreateCharService();
-            var character = characterService.GetCharById(id);
-            //character.AddedBy = characterService.
             CharItemService charItemService = CreateCharItemService();
-            var charItems = charItemService.GetCharItemList(id);
+            CharMediaService charMediaService = CreateCharMediaService();
+
+            CharDetail character = characterService.GetCharById(charId); //grabs char by id and sets up new character as CharDetail
+
+            var charItems = charItemService.GetCharItemList(charId);    //gets list of items from CharItemService
             character.Items = charItems.ToList();
-            /*  media listing stuff
-            MediaService mediaService = CreateMediaService();
-            var charMedia = mediaService.GetCharMediaByCharId();
+
+            var charMedia = charMediaService.GetCharMediaList(charId);
             character.Media = charMedia.ToList();
-            */
+            
             return Ok(character);
-        }/*
-        public IHttpActionResult Put(NoteEdit note)
+        }
+
+        //Edit/Update character, takes a CharEdit and uses UpdateCharacter service
+        public IHttpActionResult Put(CharEdit character)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var service = CreateNoteService();
-
-            if (!service.UpdateNote(note))
-                return InternalServerError();
-
+            if (ModelState.IsValid == false) return BadRequest(ModelState);
+            var service = CreateCharService();
+            if (service.UpdateCharacter(character) == false) return InternalServerError();
             return Ok();
-        }*/
+        }
 
+        //Create Character, takes a Character and uses CreateCharacter service
         public IHttpActionResult Post(CharCreate character)
         {
             if (ModelState.IsValid == false) return BadRequest(ModelState);
             var service = CreateCharService();
-
-            //service.CreateCharacter()
             if (service.CreateCharacter(character) == false) return InternalServerError();
             return Ok();
         }
         
+        //Deletes a character by CharId, using DeleteCharacter
         public IHttpActionResult Delete(int id)
         {
             var service = CreateCharService();
-
-            if (!service.DeleteChar(id))
-                return InternalServerError();
-
+            if (!service.DeleteCharacter(id)) return InternalServerError();
             return Ok();
         }
 
+        //creates services for the above actions
+        [Authorize]
         private CharacterService CreateCharService()
         {
-            /*var userId = User.Identity.GetUserId;
-            //var userId = User.Identity.Name;
-            var userId = Guid.Parse(User.Identity.GetUserId());
-
-            var characterService = new CharacterService(userId);*/
-            var characterService = new CharacterService(); 
-
-            return characterService;
+            var userId = User.Identity.GetUserId();
+            var characterService = new CharacterService(userId); 
+            
+            return characterService; 
         }
 
         private CharItemService CreateCharItemService()
-        {
-            var charItemService = new CharItemService();
+        { var service = new CharItemService(); return service; }
 
-            return charItemService;
-        }
-
-        private MediaService CreateMediaService()
-        {
-            var service = new MediaService();
-
-            return service;
-        }
+        private CharMediaService CreateCharMediaService()
+        { var service = new CharMediaService(); return service; }
     }
 }

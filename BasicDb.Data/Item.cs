@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Data
 {
-    public class Item
+    public class Item : Entry
     {
         [Key]
         public int ItemId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        //[Required]
+        //public string Name { get; set; }
 
         [Required]
         public string Type { get; set; }
@@ -22,12 +22,11 @@ namespace BasicDb.Data
         [Required]
         public string Description { get; set; }
 
-        // add created DateTime
-        // add updated DateTime
-
+        
+        /* should now be inherited from entry
         public string AddedBy { get; set; }
         [ForeignKey(nameof(AddedBy))]
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }*/
 
     }
 }
