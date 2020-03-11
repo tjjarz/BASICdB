@@ -70,6 +70,28 @@ namespace BasicDb.Services
             }
         }
 
+        public IEnumerable<MediaGet> GetMediaByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Media
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new MediaGet
+                        {
+                            MediaId = e.MediaId,
+                            Title = e.Name,
+                            MediaType = e.Medium,
+                            Description = e.Description,
+                            AddedBy = e.AddedBy
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
+            }
+        }
+
         //UPDATE
         public string UpdateMedia(MediaUpdate media)
         {

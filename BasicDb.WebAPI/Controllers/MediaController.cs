@@ -59,6 +59,16 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(mediaById);
         }
 
+        //Get Media by Name (returns as MediaGet)
+        [HttpGet]
+        public IHttpActionResult GetMediaByName(string name)
+        {
+            MediaService mediaService = CreateMediaService();
+            var media = mediaService.GetMediaByName(name);
+
+            return Ok(media);
+        }
+
         //UPDATE
         [HttpPut]
         public IHttpActionResult Update(MediaUpdate media)
