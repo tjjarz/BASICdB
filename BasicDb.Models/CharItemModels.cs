@@ -21,4 +21,23 @@ namespace BasicDb.Models
         public string ItemName { get; set; }
     }
 
+    public class EditCharItem
+    {
+        [Key]
+        public int CharItemId { get; set; }
+
+        [Required]
+        public int CharId { get; set; }
+
+        [Required]
+        public int ItemId { get; set; }
+    }
+
+        public class PostCharItem
+    {
+        [Required]
+        public int CharId { get; set; }
+        [Required]
+        public int ItemId { get; set; }
+    }
 }

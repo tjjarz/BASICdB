@@ -124,7 +124,7 @@ namespace BasicDb.Services
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
                         //Description = e.Media.Description,
-                        MediaType = e.Media.MediaType
+                        MediaType = e.Media.Medium
                     });
                 return entity.ToArray();
             }
