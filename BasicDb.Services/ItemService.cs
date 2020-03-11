@@ -104,5 +104,27 @@ namespace BasicDb.Services
                 return new ItemDetail { Name = "pbtd" };
             }
         }
+
+        public IEnumerable<ItemDetail> GetItemByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Items
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new ItemDetail
+                        {
+                            ItemId = e.ItemId,
+                            Name = e.Name,
+                            Type = e.Type,
+                            Description = e.Description,
+                            AddedBy = e.AddedBy
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
+            }
+        }
     }
 }

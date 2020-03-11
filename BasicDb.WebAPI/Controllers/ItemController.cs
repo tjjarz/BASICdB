@@ -62,6 +62,15 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(item);
         }
 
+        //Get item by Name (returns as ItemDetail)
+        public IHttpActionResult GetName(string name)
+        {
+            ItemService service = CreateItemService();
+            var items = service.GetItemByName(name);
+
+            return Ok(items);
+        }
+
         [HttpPut]
         public IHttpActionResult Put(ItemEdit item)
         {

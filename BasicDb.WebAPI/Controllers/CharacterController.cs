@@ -40,6 +40,15 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(character);
         }
 
+        //Get character by Name (returns as CharListItem)
+        public IHttpActionResult GetName(string name)
+        {
+            CharacterService characterService = CreateCharService();
+            var characters = characterService.GetCharByName(name);
+
+            return Ok(characters);
+        }
+
         //Edit/Update character, takes a CharEdit and uses UpdateCharacter service
         public IHttpActionResult Put(CharEdit character)
         {
