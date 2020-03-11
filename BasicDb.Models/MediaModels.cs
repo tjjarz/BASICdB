@@ -40,14 +40,4 @@ namespace BasicDb.Models
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
     }
-    /*
-    public class MediaDetail
-    {
-        public int MediaId { get; set; }
-        public string Title { get; set; }
-        public MediaType Medium { get; set; }
-        public string Description { get; set; }
-    }*/
-
-    
 }

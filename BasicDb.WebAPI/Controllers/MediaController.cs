@@ -19,7 +19,6 @@ namespace BasicDb.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-
             if (ModelState == null)
             {
                 return BadRequest("Could not post");
@@ -27,10 +26,12 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateMediaService();
 
-            if (!service.CreateMedia(media))
+            if (service.CreateMedia(media) == "Successfully posted")
+            {
                 return InternalServerError();
+            }
 
-            return Ok();
+            return Ok(media);
         }
 
         private MediaService CreateMediaService()
@@ -48,19 +49,33 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(medias);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetMediaById(int id)
+        {
+            MediaService mediaService = CreateMediaService();
+            var mediaById = mediaService.GetMediaById(id);
+            return Ok(mediaById);
+        }
+
         //UPDATE
         [HttpPut]
         public IHttpActionResult Update(MediaUpdate media)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (media == null)
+                return BadRequest("Must not be null");
 
             var service = CreateMediaService();
 
-            if (!service.UpdateMedia(media))
-                return InternalServerError();
+            string updateMessage = service.UpdateMedia(media);
 
-            return Ok();
+            if (updateMessage == "Something did not go right")
+                return InternalServerError();
+            else if (updateMessage == "Media not found")
+                return NotFound();
+
+            return Ok(media);
         }
 
         //DELETE
@@ -69,12 +84,16 @@ namespace BasicDb.WebAPI.Controllers
         {
             var service = CreateMediaService();
 
-            if (!service.DeleteMedia(id))
+            string deleteMessage = service.DeleteMedia(id);
+
+            if (deleteMessage == "Error")
                 return InternalServerError();
 
-            return Ok();
+            if (deleteMessage == "Not Found")
+                return NotFound();
+
+            return Ok("Media was successfully deleted");
         }
     }
-
 }
 
