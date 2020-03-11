@@ -21,12 +21,12 @@ namespace BasicDb.WebAPI.Controllers
 
             if (ModelState == null)
             {
-                return BadRequest("");
+                return BadRequest("Could not post");
             }
 
             var service = CreateMediaService();
 
-            if (service.CreateMedia(media) == "Could not post")
+            if (service.CreateMedia(media) == "Successfully posted")
             {
                 return InternalServerError();
             }

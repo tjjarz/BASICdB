@@ -37,10 +37,15 @@ namespace BasicDb.Services
         }
 
         //GET
-        public List<Media> GetMedia()
+        public IEnumerable<MediaGet> GetMedia()
         {
-            var ctx = new ApplicationDbContext();
-            return ctx.Media.ToList();
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var query = ctx.Media.Select(e => new MediaGet { MediaId = e.MediaId, Title = e.Title, MediaType = e.MediaType, Description = e.Description, AddedBy = e.User.UserName });
+                    return query.ToArray();
+                }
+            }
         }
 
         public MediaGet GetMediaById(int id)
@@ -69,7 +74,7 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId);
+                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
                 entity.Title = media.Title;
                 entity.MediaType = media.MediaType;
