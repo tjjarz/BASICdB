@@ -33,18 +33,23 @@ namespace BasicDb.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Media.Add(entity);
-                return ctx.SaveChanges() == 1 ? "Media has been created": "Media was not able to be created";
+                return ctx.SaveChanges() == 1 ? "Media has been created" : "Media was not able to be created";
             }
         }
 
         //GET
-        public List<Media> GetMedia()
+        public IEnumerable<MediaGet> GetMedia()
         {
-            var ctx = new ApplicationDbContext();
-            return ctx.Media.ToList();
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var query = ctx.Media.Select(e => new MediaGet { MediaId = e.MediaId, Title = e.Title, MediaType = e.MediaType, Description = e.Description, AddedBy = e.User.UserName });
+                    return query.ToArray();
+                }
+            }
         }
 
-        public MediaDetail GetMediaById(int id)
+        public MediaGet GetMediaById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -52,7 +57,7 @@ namespace BasicDb.Services
                 {
                     var entity = ctx.Media.Single(e => e.MediaId == id);
 
-                    return new MediaDetail
+                    return new MediaGet
                     {
                         MediaId = entity.MediaId,
                         Title = entity.Name,
@@ -61,7 +66,7 @@ namespace BasicDb.Services
                     };
                 }
 
-                return new MediaDetail();
+                return new MediaGet();
             }
         }
 
@@ -70,14 +75,15 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId);
+                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
                 entity.Name = media.Title;
                 entity.MediaType = media.MediaType;
                 entity.Description = media.Description;
+                entity.AddedBy = media.AddedBy;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1 ? "Media has been updated ": "Media was not updated";
+                return ctx.SaveChanges() == 1 ? "Media has been updated " : "Media was not updated";
             }
         }
 
@@ -93,7 +99,7 @@ namespace BasicDb.Services
 
                 ctx.Media.Remove(entity);
 
-                return ctx.SaveChanges() == 1 ? "Successfully deleted media": "Unsuccessful deletion of media";
+                return ctx.SaveChanges() == 1 ? "Successfully deleted media" : "Unsuccessful deletion of media";
             }
         }
     }

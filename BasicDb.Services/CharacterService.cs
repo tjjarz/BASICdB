@@ -73,6 +73,7 @@ namespace BasicDb.Services
                         CreatedOn = entity.CreatedOn,
                         ModifiedOn = entity.ModifiedOn,
                         AddedBy = entity.User.UserName
+
                         //will need lists and user here too eventually
                     };
             }
