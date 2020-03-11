@@ -79,6 +79,27 @@ namespace BasicDb.Services
             }
         }
 
+        public IEnumerable<CharListItem> GetCharByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Characters
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new CharListItem
+                        {
+                            CharId = e.CharId,
+                            Name = e.Name,
+                            ShortDescription = e.ShortDescription
+                            //will need lists and user here too eventually
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
+            }
+        }
+
         public bool UpdateCharacter(CharEdit character)
         {
             using (var ctx = new ApplicationDbContext())
