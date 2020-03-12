@@ -41,7 +41,7 @@ namespace BasicDb.Models
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
-        public List<ItemDetail> Items { get; set; }
+        public List<ItemGetAll> Items { get; set; }
         public List<MediaShort> Media { get; set; }
         public string AddedBy { get; set; }
         public DateTime CreatedOn { get; set; }

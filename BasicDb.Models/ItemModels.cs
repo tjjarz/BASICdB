@@ -16,7 +16,7 @@ namespace BasicDb.Models
 
 
         //[ForeignKey(nameof(User))]
-        public string AddedBy { get; set; }
+        //public string AddedBy { get; set; }
         //public virtual ApplicationUser User { get; set; }
     }
 
@@ -43,5 +43,6 @@ namespace BasicDb.Models
         public string Type { get; set; }
         public string Description { get; set; }
         public string AddedBy { get; set; }
+
     }
 }

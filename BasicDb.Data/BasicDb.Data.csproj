@@ -95,9 +95,9 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="Migrations\202003111849111_FixTableColumns.cs" />
-    <Compile Include="Migrations\202003111849111_FixTableColumns.designer.cs">
-      <DependentUpon>202003111849111_FixTableColumns.cs</DependentUpon>
+    <Compile Include="Migrations\202003121321422_InitialMigration.cs" />
+    <Compile Include="Migrations\202003121321422_InitialMigration.designer.cs">
+      <DependentUpon>202003121321422_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,8 +107,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003111849111_FixTableColumns.resx">
-      <DependentUpon>202003111849111_FixTableColumns.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003121321422_InitialMigration.resx">
+      <DependentUpon>202003121321422_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

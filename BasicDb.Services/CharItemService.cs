@@ -122,7 +122,7 @@ namespace BasicDb.Services
             }
         }
         //newwer betterer get charitems list
-        public IEnumerable<ItemDetail> GetCharItemList(int charId)
+        public IEnumerable<ItemGetAll> GetCharItemList(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -131,12 +131,12 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    (e => new ItemDetail
+                    (e => new ItemGetAll
                     {
                         ItemId = e.Item.ItemId,
                         Name = e.Item.Name,
-                        Description = e.Item.Description,
-                        Type = e.Item.Type
+                        Type = e.Item.Type,
+                        AddedBy = e.Item.User.UserName
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
