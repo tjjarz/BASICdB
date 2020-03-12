@@ -37,69 +37,6 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<CharListItem> GetCharacters()
-        {
-            var ctx = new ApplicationDbContext();
-
-            var entity =
-                ctx
-                    .Characters
-                    .Select(e =>
-                new CharListItem
-                {
-                    CharId = e.CharId,
-                    Name = e.Name,
-                    ShortDescription = e.ShortDescription
-                        //will need lists and user here too eventually
-                    });
-            return entity;
-        }
-
-        public CharDetail GetCharById(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                        .Characters
-                        .Single(e => e.CharId == id);
-                return
-                    new CharDetail
-                    {
-                        CharId = entity.CharId,
-                        Name = entity.Name,
-                        ShortDescription = entity.ShortDescription,
-                        Description = entity.Description,
-                        CreatedOn = entity.CreatedOn,
-                        ModifiedOn = entity.ModifiedOn,
-                        AddedBy = entity.User.UserName
-
-                        //will need lists and user here too eventually
-                    };
-            }
-        }
-
-        public IEnumerable<CharListItem> GetCharByName(string name)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                        .Characters
-                        .Where(e => e.Name.Contains(name))
-                        .Select
-                        (e => new CharListItem
-                        {
-                            CharId = e.CharId,
-                            Name = e.Name,
-                            ShortDescription = e.ShortDescription
-                            //will need lists and user here too eventually
-                        });
-                var asArray = entity.ToArray();
-                return asArray;
-            }
-        }
-
         public bool UpdateCharacter(CharEdit character)
         {
             using (var ctx = new ApplicationDbContext())
@@ -127,5 +64,68 @@ namespace BasicDb.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public CharDetail GetCharById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Characters
+                        .Single(e => e.CharId == id);
+                return
+                    new CharDetail
+                    {
+                        CharId = entity.CharId,
+                        Name = entity.Name,
+                        ShortDescription = entity.ShortDescription,
+                        Description = entity.Description,
+                        CreatedOn = entity.CreatedOn,
+                        ModifiedOn = entity.ModifiedOn,
+                        AddedBy = entity.User.UserName
+
+                        //will need lists and user here too eventually
+                    };
+            }
+        }
+
+        public IEnumerable<CharListItem> GetCharacters()
+        {
+            var ctx = new ApplicationDbContext();
+
+            var entity =
+                ctx
+                .Characters
+                .Select(e =>
+                new CharListItem
+                {
+                    CharId = e.CharId,
+                    Name = e.Name,
+                    ShortDescription = e.ShortDescription
+                });
+            return entity;
+        }
+
+        public IEnumerable<CharListItem> GetCharacters(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Characters
+                    .Where(e => e.Name.Contains(name))
+                    .Select
+                    (e => new CharListItem
+                    {
+                        CharId = e.CharId,
+                        Name = e.Name,
+                        ShortDescription = e.ShortDescription
+                    });
+                    //var asArray = entity.ToArray();
+                return entity;
+            }
+        }
+
+
     }
 }

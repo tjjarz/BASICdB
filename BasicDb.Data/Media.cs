@@ -17,7 +17,7 @@ namespace BasicDb.Data
         //public string Name { get; set; }  //now getting Name From entry
 
         [Required]
-        public string Medium { get; set; }
+        public string MediaType { get; set; }
 
         [Required]
         public string Description { get; set; }
