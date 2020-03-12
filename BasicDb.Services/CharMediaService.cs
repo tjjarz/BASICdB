@@ -24,6 +24,14 @@ namespace BasicDb.Services
                 };
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId) == 0)
+                {
+                    return $"Media {model.MediaId} NOT found in table";
+                }
                 if (ctx.CharMedia.Count(e => e.Character.CharId == model.CharId && e.Media.MediaId == model.MediaId)
                     > 0)
                 {
@@ -44,6 +52,14 @@ namespace BasicDb.Services
                 if (ctx.CharMedia.Count(e => e.CharMediaId == model.CharMediaId) == 0)
                 {
                     return "Record not found in table";
+                }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId) == 0)
+                {
+                    return $"Media {model.MediaId} NOT found in table";
                 }
                 if (ctx.CharMedia.Count(e => e.CharId == model.CharId && e.MediaId == model.MediaId) != 0)
                 {
