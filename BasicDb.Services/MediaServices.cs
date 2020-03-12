@@ -15,52 +15,102 @@ namespace BasicDb.Services
         {
             _userId = userId;
         }
-        public MediaService() { }
 
         //POST
-        public bool CreateMedia(MediaCreate media)
+        public string CreateMedia(MediaCreate media)
         {
             var entity =
                 new Media()
                 {
-                    MediaId = media.MediaId,
-                    Title = media.Title,
-                    Medium = media.Medium,
-                    Description = media.Description
+                    AddedBy = _userId,
+                    Name = media.Name,
+                    MediaType = media.MediaType,
+                    Description = media.Description,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Media.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 ? "Media has been created" : "Media was not able to be created";
             }
         }
 
         //GET
-        public List<Media> GetMedia()
+        public IEnumerable<MediaGet> GetMedia()
         {
-            var ctx = new ApplicationDbContext();
-            return ctx.Media.ToList();
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var query = ctx.Media.Select(e => new MediaGet { MediaId = e.MediaId, Title = e.Name, MediaType = e.MediaType, Description = e.Description, AddedBy = e.User.UserName });
+                    return query.ToArray();
+                }
+            }
         }
 
-        //UPDATE
-        public bool UpdateMedia(MediaUpdate media)
+        public MediaGet GetMediaById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId);
+                if (ctx.Media.Count(e => e.MediaId == id) > 0)
+                {
+                    var entity = ctx.Media.Single(e => e.MediaId == id);
+
+                    return new MediaGet
+                    {
+                        MediaId = entity.MediaId,
+                        Title = entity.Name,
+                        MediaType = entity.MediaType,
+                        Description = entity.Description,
+                    };
+                }
+
+                return new MediaGet();
+            }
+        }
+
+        public IEnumerable<MediaGet> GetMediaByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Media
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new MediaGet
+                        {
+                            MediaId = e.MediaId,
+                            Title = e.Name,
+                            MediaType = e.MediaType,
+                            Description = e.Description,
+                            AddedBy = e.AddedBy
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
+            }
+        }
+
+        //UPDATE
+        public string UpdateMedia(MediaUpdate media)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
-                entity.Title = media.Title;
-                entity.Medium = media.Medium;
+                entity.Name = media.Title;
+                entity.MediaType = media.MediaType;
                 entity.Description = media.Description;
+                entity.AddedBy = media.AddedBy;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 ? "Media has been updated " : "Media was not updated";
             }
         }
 
         //DELETE
-        public bool DeleteMedia(int Id)
+        public string DeleteMedia(int Id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -71,7 +121,7 @@ namespace BasicDb.Services
 
                 ctx.Media.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 ? "Successfully deleted media" : "Unsuccessful deletion of media";
             }
         }
     }

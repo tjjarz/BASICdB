@@ -29,6 +29,14 @@ namespace BasicDb.Services
                 {
                     return "Combination already exists";
                 }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Items.Count(e => e.ItemId == model.ItemId) == 0)
+                {
+                    return $"Item {model.ItemId} NOT found in table";
+                }
                 ctx.CharItems.Add(entity);
                 if (ctx.SaveChanges() == 1)
                     return "Character/Item Combination created";
@@ -44,6 +52,14 @@ namespace BasicDb.Services
                 if (ctx.CharItems.Count(e => e.CharItemId == model.CharItemId) == 0)
                 {
                     return "Record not found in table";
+                }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Items.Count(e => e.ItemId == model.ItemId) == 0)
+                {
+                    return $"Item {model.ItemId} NOT found in table";
                 }
                 if (ctx.CharItems.Count(e => e.CharId == model.CharId && e.ItemId == model.ItemId) != 0)
                 {
@@ -122,7 +138,7 @@ namespace BasicDb.Services
             }
         }
         //newwer betterer get charitems list
-        public IEnumerable<ItemDetail> GetCharItemList(int charId)
+        public IEnumerable<ItemGetAll> GetCharItemList(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -131,12 +147,12 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    (e => new ItemDetail
+                    (e => new ItemGetAll
                     {
                         ItemId = e.Item.ItemId,
                         Name = e.Item.Name,
-                        Description = e.Item.Description,
-                        Type = e.Item.Type
+                        Type = e.Item.Type,
+                        AddedBy = e.Item.User.UserName
                         //CharItems = e.Character.Item
                     });
                 return entity.ToArray();

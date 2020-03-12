@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,25 @@ namespace BasicDb.Models
         public string Title { get; set; }
         public string Medium { get; set; }
         public string MediaDescription { get; set; }
+    }
+    
+    public class EditCharMedia
+    {
+        [Key]
+        public int CharMediaId { get; set; }
+
+        [Required]
+        public int CharId { get; set; }
+
+        [Required]
+        public int MediaId { get; set; }
+    }
+
+    public class PostCharMedia
+    {
+        [Required]
+        public int CharId { get; set; }
+        [Required]
+        public int MediaId { get; set; }
     }
 }

@@ -91,16 +91,26 @@
     <Compile Include="Character.cs" />
     <Compile Include="CharItem.cs" />
     <Compile Include="CharMedia.cs" />
+    <Compile Include="Entry.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Media.cs" />
+    <Compile Include="Migrations\202003121321422_InitialMigration.cs" />
+    <Compile Include="Migrations\202003121321422_InitialMigration.designer.cs">
+      <DependentUpon>202003121321422_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003121321422_InitialMigration.resx">
+      <DependentUpon>202003121321422_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

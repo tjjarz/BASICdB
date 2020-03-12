@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BasicDb.Data;
 
 namespace BasicDb.WebAPI.Controllers
 {
@@ -60,6 +61,15 @@ namespace BasicDb.WebAPI.Controllers
                 return NotFound();
 
             return Ok(item);
+        }
+
+        //Get item by Name (returns as ItemDetail)
+        public IHttpActionResult GetName(string name)
+        {
+            ItemService service = CreateItemService();
+            var items = service.GetItemByName(name);
+
+            return Ok(items);
         }
 
         [HttpPut]

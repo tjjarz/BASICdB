@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace BasicDb.Data
 {
-    public enum MediaType { Movie = 0, Comic, Book, Show, Play, Podcast }
-
-    public class Media
+    public class Media : Entry
     {
         [Key]
         public int MediaId { get; set; }
 
-        [Required]
-        public string Title { get; set; }
+        //[Required]
+        //public string Name { get; set; }  //now getting Name From entry
 
         [Required]
-        public MediaType Medium { get; set; }
+        public string MediaType { get; set; }
 
         [Required]
         public string Description { get; set; }
 
+        //public string AddedBy { get; set; }
+        /*
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }*/
     }
 }

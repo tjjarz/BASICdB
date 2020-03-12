@@ -25,7 +25,9 @@ namespace BasicDb.Services
                     Name = character.Name,
                     ShortDescription = character.ShortDescription,
                     Description = character.Description,
-                    UserId = _userId
+                    AddedBy = _userId,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now
                     //CreatedUtc = DateTimeOffset.Now
                 };
             using (var ctx = new ApplicationDbContext())
@@ -35,18 +37,32 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<Character> GetCharacters()
+        public bool UpdateCharacter(CharEdit character)
         {
-            var ctx = new ApplicationDbContext();
-
-
-            return ctx.Characters.ToArray();
-
-            /*
-            using (var ctx = new ApplicationDbContext()) 
+            using (var ctx = new ApplicationDbContext())
             {
-                return ctx.Characters.ToArray();
-            }*/
+                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
+                entity.Name = character.Name;
+                entity.ShortDescription = character.ShortDescription;
+                entity.Description = character.Description;
+                entity.ModifiedOn = DateTime.Now;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteCharacter(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Characters
+                        .Single(e => e.CharId == id);
+
+                ctx.Characters.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         public CharDetail GetCharById(int id)
@@ -63,38 +79,53 @@ namespace BasicDb.Services
                         CharId = entity.CharId,
                         Name = entity.Name,
                         ShortDescription = entity.ShortDescription,
-                        Description = entity.Description
+                        Description = entity.Description,
+                        CreatedOn = entity.CreatedOn,
+                        ModifiedOn = entity.ModifiedOn,
+                        AddedBy = entity.User.UserName
+
                         //will need lists and user here too eventually
                     };
             }
         }
 
-        public bool UpdateCharacter(CharEdit character)
+        public IEnumerable<CharListItem> GetCharacters()
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
-                entity.Name = character.Name;
-                entity.ShortDescription = character.ShortDescription;
-                entity.Description = character.Description;
-                //entity.ModifiedUtc = DateTimeOffset.UtcNow;
+            var ctx = new ApplicationDbContext();
 
-                return ctx.SaveChanges() == 1;
-            }
+            var entity =
+                ctx
+                .Characters
+                .Select(e =>
+                new CharListItem
+                {
+                    CharId = e.CharId,
+                    Name = e.Name,
+                    ShortDescription = e.ShortDescription
+                });
+            return entity;
         }
-        public bool DeleteChar(int id)
+
+        public IEnumerable<CharListItem> GetCharacters(string name)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Characters
-                        .Single(e => e.CharId == id);
-
-                ctx.Characters.Remove(entity);
-
-                return ctx.SaveChanges() == 1;
+                    .Characters
+                    .Where(e => e.Name.Contains(name))
+                    .Select
+                    (e => new CharListItem
+                    {
+                        CharId = e.CharId,
+                        Name = e.Name,
+                        ShortDescription = e.ShortDescription
+                    });
+                    //var asArray = entity.ToArray();
+                return entity;
             }
         }
+
+
     }
 }

@@ -23,7 +23,9 @@ namespace BasicDb.Services
                 AddedBy = _userId,
                 Type = model.Type,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -95,11 +97,33 @@ namespace BasicDb.Services
                         Name = entity.Name,
                         Type = entity.Type,
                         Description = entity.Description,
-                        AddedBy = entity.User.UserName
+                        AddedBy = entity.AddedBy
                     };
                 }
 
                 return new ItemDetail { Name = "pbtd" };
+            }
+        }
+
+        public IEnumerable<ItemDetail> GetItemByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Items
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new ItemDetail
+                        {
+                            ItemId = e.ItemId,
+                            Name = e.Name,
+                            Type = e.Type,
+                            Description = e.Description,
+                            AddedBy = e.AddedBy
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
             }
         }
     }

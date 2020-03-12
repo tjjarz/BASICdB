@@ -24,6 +24,14 @@ namespace BasicDb.Services
                 };
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId) == 0)
+                {
+                    return $"Media {model.MediaId} NOT found in table";
+                }
                 if (ctx.CharMedia.Count(e => e.Character.CharId == model.CharId && e.Media.MediaId == model.MediaId)
                     > 0)
                 {
@@ -44,6 +52,14 @@ namespace BasicDb.Services
                 if (ctx.CharMedia.Count(e => e.CharMediaId == model.CharMediaId) == 0)
                 {
                     return "Record not found in table";
+                }
+                if (ctx.Characters.Count(e => e.CharId == model.CharId) == 0)
+                {
+                    return $"Character {model.CharId} NOT found in table";
+                }
+                if (ctx.Media.Count(e => e.MediaId == model.MediaId) == 0)
+                {
+                    return $"Media {model.MediaId} NOT found in table";
                 }
                 if (ctx.CharMedia.Count(e => e.CharId == model.CharId && e.MediaId == model.MediaId) != 0)
                 {
@@ -85,7 +101,7 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<GetCharMedia> getCharMediaByCharId(int charId)
+        public IEnumerable<GetCharMedia> GetCharMediaByCharId(int charId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -101,10 +117,31 @@ namespace BasicDb.Services
                         ShortDescription = e.Character.ShortDescription,
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
-                        Title = e.Media.Title,
+                        Title = e.Media.Name,
                         Medium = e.Media.Medium.ToString(),
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
+                    });
+                return entity.ToArray();
+            }
+        }
+
+        public IEnumerable<MediaShort> GetCharMediaList(int charId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharMedia
+                    .Where(e => e.Character.CharId == charId)
+                    .Select
+                    (e => new MediaShort
+                    {
+                        MediaId = e.Media.MediaId,
+                        Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
+                        //Description = e.Media.Description,
+                        MediaType = e.Media.Medium,
+                        AddedBy = e.Media.User.UserName
                     });
                 return entity.ToArray();
             }
