@@ -31,10 +31,6 @@ namespace BasicDb.Models
 
     }
 
-
-    // perhaps these should not actually inherit Entry but should instead 
-    // have that information converted into a string at modeling?
-
     public class CharDetail
     {
         public int CharId { get; set; }

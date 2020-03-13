@@ -12,13 +12,54 @@ namespace BasicDb.WebAPI.Controllers
 {
     public class CharacterController : ApiController
     {
-        //returns a list of all characters as CharListItem
-        public IHttpActionResult Get()
+        //creates services for the below actions
+        [Authorize]
+        private CharacterService CreateCharService()
         {
-            CharacterService characterService = CreateCharService();
-            var characterList = characterService.GetCharacters();
+            var userId = User.Identity.GetUserId();
+            var characterService = new CharacterService(userId);
 
-            return Ok(characterList);
+            return characterService;
+        }
+
+        private CharItemService CreateCharItemService()
+        { var service = new CharItemService(); return service; }
+
+        private CharMediaService CreateCharMediaService()
+        { var service = new CharMediaService(); return service; }
+
+
+
+        //Create Character, takes a Character and uses CreateCharacter service
+        public IHttpActionResult Post(CharCreate character)
+        {
+            if (ModelState.IsValid == false) return BadRequest(ModelState);
+            var service = CreateCharService();
+            if (service.CreateCharacter(character) == false) return InternalServerError();
+            return Ok();
+        }
+
+        //Edit/Update character, takes a CharEdit and uses UpdateCharacter service
+        public IHttpActionResult Put(CharEdit character)
+        {
+            if (ModelState.IsValid == false) return BadRequest(ModelState);
+            var service = CreateCharService();
+            string error = (service.UpdateCharacter(character));
+            if (error != null) 
+                return BadRequest(error);
+
+            return Ok();
+        }
+
+        //Deletes a character by CharId, using DeleteCharacter
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateCharService();
+            string error = (service.DeleteCharacter(id));
+            if (error != null)
+                return BadRequest(error);
+
+            return Ok();
         }
 
         //Get character by CharId (returns as CharDetail)
@@ -40,61 +81,56 @@ namespace BasicDb.WebAPI.Controllers
             return Ok(character);
         }
 
-        //Get character by Name (returns as CharListItem)
-        public IHttpActionResult GetName(string name)
+        //returns an enumerable of all characters as CharListItem
+        public IHttpActionResult GetCharacters()
         {
             CharacterService characterService = CreateCharService();
-            var characters = characterService.GetCharByName(name);
+            var allCharacters = characterService.GetCharacters();
+
+            return Ok(allCharacters);
+        }
+
+        //returns an enumerable of characters by Name as CharListItem
+        public IHttpActionResult GetCharacters(string name)
+        {
+            CharacterService characterService = CreateCharService();
+            var characters = characterService.GetCharacters(name);
 
             return Ok(characters);
         }
-
-        //Edit/Update character, takes a CharEdit and uses UpdateCharacter service
-        public IHttpActionResult Put(CharEdit character)
-        {
-            if (ModelState.IsValid == false) return BadRequest(ModelState);
-            var service = CreateCharService();
-            string error = (service.UpdateCharacter(character));
-            if (error != null) 
-                return BadRequest(error);
-
-            return Ok();
-        }
-
-        //Create Character, takes a Character and uses CreateCharacter service
-        public IHttpActionResult Post(CharCreate character)
-        {
-            if (ModelState.IsValid == false) return BadRequest(ModelState);
-            var service = CreateCharService();
-            if (service.CreateCharacter(character) == false) return InternalServerError();
-            return Ok();
-        }
-        
-        //Deletes a character by CharId, using DeleteCharacter
-        public IHttpActionResult Delete(int id)
-        {
-            var service = CreateCharService();
-            string error = (service.DeleteCharacter(id));
-            if (error != null)
-                return BadRequest(error);
-
-            return Ok();
-        }
-
-        //creates services for the above actions
-        [Authorize]
-        private CharacterService CreateCharService()
-        {
-            var userId = User.Identity.GetUserId();
-            var characterService = new CharacterService(userId); 
-            
-            return characterService; 
-        }
-
-        private CharItemService CreateCharItemService()
-        { var service = new CharItemService(); return service; }
-
-        private CharMediaService CreateCharMediaService()
-        { var service = new CharMediaService(); return service; }
+//<<<<<<< kerry9
+//            if (ModelState.IsValid == false) return BadRequest(ModelState);
+//            var service = CreateCharService();
+//            string error = (service.UpdateCharacter(character));
+//            if (error != null) 
+//                return BadRequest(error);
+//
+//            return Ok();
+//        }
+//
+//        //Create Character, takes a Character and uses CreateCharacter service
+//        public IHttpActionResult Post(CharCreate character)
+//        {
+//            if (ModelState.IsValid == false) return BadRequest(ModelState);
+//            var service = CreateCharService();
+//            if (service.CreateCharacter(character) == false) return InternalServerError();
+//            return Ok();
+//        }
+//        
+//        //Deletes a character by CharId, using DeleteCharacter
+//        public IHttpActionResult Delete(int id)
+//        {
+//            var service = CreateCharService();
+//            string error = (service.DeleteCharacter(id));
+//            if (error != null)
+//                return BadRequest(error);
+//
+//            return Ok();
+//=======
+//            CharacterService characterService = CreateCharService();
+//            var characters = characterService.GetCharacters(name);
+//
+//            return Ok(characters);
+//>>>>>>> dev
     }
 }

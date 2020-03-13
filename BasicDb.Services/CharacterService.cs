@@ -37,22 +37,32 @@ namespace BasicDb.Services
             }
         }
 
-        public IEnumerable<CharListItem> GetCharacters()
+//        public bool UpdateCharacter(CharEdit character)
+//        {
+//            using (var ctx = new ApplicationDbContext())
+//            {
+//                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
+//                entity.Name = character.Name;
+//                entity.ShortDescription = character.ShortDescription;
+//                entity.Description = character.Description;
+//                entity.ModifiedOn = DateTime.Now;
+//
+//                return ctx.SaveChanges() == 1;
+//            }
+//        }
+        public bool DeleteCharacter(int id)
         {
-            var ctx = new ApplicationDbContext();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Characters
+                        .Single(e => e.CharId == id);
 
-            var entity =
-                ctx
-                    .Characters
-                    .Select(e =>
-                new CharListItem
-                {
-                    CharId = e.CharId,
-                    Name = e.Name,
-                    ShortDescription = e.ShortDescription
-                        //will need lists and user here too eventually
-                    });
-            return entity;
+                ctx.Characters.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         public CharDetail GetCharById(int id)
@@ -79,6 +89,7 @@ namespace BasicDb.Services
             }
         }
 
+//<<<<<<< kerry9
         public IEnumerable<CharListItem> GetCharByName(string name)
         {
             using (var ctx = new ApplicationDbContext())
@@ -120,7 +131,28 @@ namespace BasicDb.Services
                 return $"Character {character.CharId} NOT updated - unknown error";
             }
         }
+//        public string DeleteCharacter(int id)
+//=======
+        public IEnumerable<CharListItem> GetCharacters()
+        {
+            var ctx = new ApplicationDbContext();
+
+            var entity =
+                ctx
+                .Characters
+                .Select(e =>
+                new CharListItem
+                {
+                    CharId = e.CharId,
+                    Name = e.Name,
+                    ShortDescription = e.ShortDescription
+                });
+            return entity;
+        }
+
+//        public IEnumerable<CharListItem> GetCharacters(string name)
         public string DeleteCharacter(int id)
+//>>>>>>> dev
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -138,6 +170,7 @@ namespace BasicDb.Services
                 //}
                 var entity =
                     ctx
+//<<<<<<< kerry9
                         .Characters
                         .Single(e => e.CharId == id);
 
@@ -147,7 +180,22 @@ namespace BasicDb.Services
                     return null;
 
                 return $"Character {id} not found in Character Table";
+//=======
+//                    .Characters
+//                    .Where(e => e.Name.Contains(name))
+//                    .Select
+//                    (e => new CharListItem
+//                    {
+//                        CharId = e.CharId,
+//                        Name = e.Name,
+//                        ShortDescription = e.ShortDescription
+//                    });
+//                    //var asArray = entity.ToArray();
+//                return entity;
+//>>>>>>> dev
             }
         }
+
+
     }
 }

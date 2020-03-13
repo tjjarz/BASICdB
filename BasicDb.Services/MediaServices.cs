@@ -24,7 +24,7 @@ namespace BasicDb.Services
                 {
                     AddedBy = _userId,
                     Name = media.Name,
-                    Medium = media.MediaType,
+                    MediaType = media.MediaType,
                     Description = media.Description,
                     CreatedOn = DateTime.Now,
                     ModifiedOn = DateTime.Now
@@ -43,7 +43,7 @@ namespace BasicDb.Services
             {
                 using (var ctx = new ApplicationDbContext())
                 {
-                    var query = ctx.Media.Select(e => new MediaGet { MediaId = e.MediaId, Title = e.Name, MediaType = e.Medium, Description = e.Description, AddedBy = e.User.UserName });
+                    var query = ctx.Media.Select(e => new MediaGet { MediaId = e.MediaId, Title = e.Name, MediaType = e.MediaType, Description = e.Description, AddedBy = e.User.UserName });
                     return query.ToArray();
                 }
             }
@@ -61,7 +61,7 @@ namespace BasicDb.Services
                     {
                         MediaId = entity.MediaId,
                         Title = entity.Name,
-                        MediaType = entity.Medium,
+                        MediaType = entity.MediaType,
                         Description = entity.Description,
                     };
                 }
@@ -83,7 +83,7 @@ namespace BasicDb.Services
                         {
                             MediaId = e.MediaId,
                             Title = e.Name,
-                            MediaType = e.Medium,
+                            MediaType = e.MediaType,
                             Description = e.Description,
                             AddedBy = e.AddedBy
                         });
@@ -104,7 +104,7 @@ namespace BasicDb.Services
                 var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
                 entity.Name = media.Title;
-                entity.Medium = media.MediaType;
+                entity.MediaType = media.MediaType;
                 entity.Description = media.Description;
                 entity.AddedBy = media.AddedBy;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
