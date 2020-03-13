@@ -54,7 +54,10 @@ namespace BasicDb.WebAPI.Controllers
         {
             if (ModelState.IsValid == false) return BadRequest(ModelState);
             var service = CreateCharService();
-            if (service.UpdateCharacter(character) == false) return InternalServerError();
+            string error = (service.UpdateCharacter(character));
+            if (error != null) 
+                return BadRequest(error);
+
             return Ok();
         }
 
@@ -71,7 +74,10 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult Delete(int id)
         {
             var service = CreateCharService();
-            if (!service.DeleteCharacter(id)) return InternalServerError();
+            string error = (service.DeleteCharacter(id));
+            if (error != null)
+                return BadRequest(error);
+
             return Ok();
         }
 

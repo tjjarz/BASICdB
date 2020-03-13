@@ -39,7 +39,7 @@ namespace BasicDb.Services
                 }
                 ctx.CharMedia.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Media Combination created";
+                    return null;
 
                 return "Character/Media Combination NOT created - unknown error";
             }
@@ -74,7 +74,7 @@ namespace BasicDb.Services
                 entity.MediaId = model.MediaId;
 
                 if (ctx.SaveChanges() == 1)
-                    return "Update completed";
+                    return null;
 
                 return "Update failed - unknown error";
             }
@@ -95,7 +95,7 @@ namespace BasicDb.Services
 
                 ctx.CharMedia.Remove(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Record Deleted";
+                    return null;
 
                 return "Delete failed - unknown error";
             }

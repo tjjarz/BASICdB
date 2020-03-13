@@ -100,23 +100,42 @@ namespace BasicDb.Services
             }
         }
 
-        public bool UpdateCharacter(CharEdit character)
+        public string UpdateCharacter(CharEdit character)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == character.CharId) == 0)
+                {
+                    return $"Character {character.CharId} NOT found in table";
+                }
                 var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
                 entity.Name = character.Name;
                 entity.ShortDescription = character.ShortDescription;
                 entity.Description = character.Description;
                 entity.ModifiedOn = DateTime.Now;
 
-                return ctx.SaveChanges() == 1;
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {character.CharId} NOT updated - unknown error";
             }
         }
-        public bool DeleteCharacter(int id)
+        public string DeleteCharacter(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == id) == 0)
+                {
+                    return $"Character {id} NOT found in table";
+                }
+                //if (ctx.CharItems.Count(e => e.CharId == id) != 0)
+                //{
+                //    return $"Character {id} is still associated with Items. Delete the association before deleting the Character";
+                //}
+                //if (ctx.CharMedia.Count(e => e.CharId == id) != 0)
+                //{
+                //    return $"Character {id} is still associated with Media. Delete the association before deleting the Character";
+                //}
                 var entity =
                     ctx
                         .Characters
@@ -124,7 +143,10 @@ namespace BasicDb.Services
 
                 ctx.Characters.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {id} not found in Character Table";
             }
         }
     }
