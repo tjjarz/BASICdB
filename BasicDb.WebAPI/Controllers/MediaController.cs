@@ -82,12 +82,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string updateMessage = service.UpdateMedia(media);
 
-            if (updateMessage == "Something did not go right")
-                return InternalServerError();
-            else if (updateMessage == "Media not found")
-                return NotFound();
+            if (updateMessage == null)
+                return Ok(media);
 
-            return Ok(media);
+            return BadRequest(updateMessage);
         }
 
         //DELETE
@@ -98,13 +96,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string deleteMessage = service.DeleteMedia(id);
 
-            if (deleteMessage == "Error")
-                return InternalServerError();
+            if (deleteMessage == null)
+                return Ok("Media was successfully deleted");
 
-            if (deleteMessage == "Not Found")
-                return NotFound();
-
-            return Ok("Media was successfully deleted");
+            return BadRequest(deleteMessage);
         }
     }
 }

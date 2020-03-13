@@ -37,19 +37,19 @@ namespace BasicDb.Services
             }
         }
 
-        public bool UpdateCharacter(CharEdit character)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
-                entity.Name = character.Name;
-                entity.ShortDescription = character.ShortDescription;
-                entity.Description = character.Description;
-                entity.ModifiedOn = DateTime.Now;
-
-                return ctx.SaveChanges() == 1;
-            }
-        }
+//        public bool UpdateCharacter(CharEdit character)
+//        {
+//            using (var ctx = new ApplicationDbContext())
+//            {
+//                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
+//                entity.Name = character.Name;
+//                entity.ShortDescription = character.ShortDescription;
+//                entity.Description = character.Description;
+//                entity.ModifiedOn = DateTime.Now;
+//
+//                return ctx.SaveChanges() == 1;
+//            }
+//        }
         public bool DeleteCharacter(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -89,6 +89,50 @@ namespace BasicDb.Services
             }
         }
 
+//<<<<<<< kerry9
+        public IEnumerable<CharListItem> GetCharByName(string name)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Characters
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new CharListItem
+                        {
+                            CharId = e.CharId,
+                            Name = e.Name,
+                            ShortDescription = e.ShortDescription
+                            //will need lists and user here too eventually
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
+            }
+        }
+
+        public string UpdateCharacter(CharEdit character)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.Characters.Count(e => e.CharId == character.CharId) == 0)
+                {
+                    return $"Character {character.CharId} NOT found in table";
+                }
+                var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
+                entity.Name = character.Name;
+                entity.ShortDescription = character.ShortDescription;
+                entity.Description = character.Description;
+                entity.ModifiedOn = DateTime.Now;
+
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {character.CharId} NOT updated - unknown error";
+            }
+        }
+//        public string DeleteCharacter(int id)
+//=======
         public IEnumerable<CharListItem> GetCharacters()
         {
             var ctx = new ApplicationDbContext();
@@ -106,23 +150,49 @@ namespace BasicDb.Services
             return entity;
         }
 
-        public IEnumerable<CharListItem> GetCharacters(string name)
+//        public IEnumerable<CharListItem> GetCharacters(string name)
+        public string DeleteCharacter(int id)
+//>>>>>>> dev
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == id) == 0)
+                {
+                    return $"Character {id} NOT found in table";
+                }
+                //if (ctx.CharItems.Count(e => e.CharId == id) != 0)
+                //{
+                //    return $"Character {id} is still associated with Items. Delete the association before deleting the Character";
+                //}
+                //if (ctx.CharMedia.Count(e => e.CharId == id) != 0)
+                //{
+                //    return $"Character {id} is still associated with Media. Delete the association before deleting the Character";
+                //}
                 var entity =
                     ctx
-                    .Characters
-                    .Where(e => e.Name.Contains(name))
-                    .Select
-                    (e => new CharListItem
-                    {
-                        CharId = e.CharId,
-                        Name = e.Name,
-                        ShortDescription = e.ShortDescription
-                    });
-                    //var asArray = entity.ToArray();
-                return entity;
+//<<<<<<< kerry9
+                        .Characters
+                        .Single(e => e.CharId == id);
+
+                ctx.Characters.Remove(entity);
+
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {id} not found in Character Table";
+//=======
+//                    .Characters
+//                    .Where(e => e.Name.Contains(name))
+//                    .Select
+//                    (e => new CharListItem
+//                    {
+//                        CharId = e.CharId,
+//                        Name = e.Name,
+//                        ShortDescription = e.ShortDescription
+//                    });
+//                    //var asArray = entity.ToArray();
+//                return entity;
+//>>>>>>> dev
             }
         }
 

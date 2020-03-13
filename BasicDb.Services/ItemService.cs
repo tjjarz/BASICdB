@@ -48,6 +48,10 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Items.Count(e => e.ItemId == model.ItemId) == 0)
+                {
+                    return $"Media ID {model.ItemId} NOT found in table";
+                }
                 int test = ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId);
                 if (ctx.Items.Count(e => e.ItemId == model.ItemId && e.AddedBy == _userId) > 0)
                 {
@@ -59,7 +63,7 @@ namespace BasicDb.Services
                     entity.Description = model.Description;
                     entity.Type = model.Type;
 
-                    return ctx.SaveChanges() == 1 ? "Updated Properly" : "Something Went Wrong";
+                    return ctx.SaveChanges() == 1 ? null : "Something Went Wrong";
                 }
                 // find out why this doesnt work later but for now it's fine
                 return "Item Not Found";
@@ -70,13 +74,17 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Items.Count(e => e.ItemId == itemId) == 0)
+                {
+                    return $"Media ID {itemId} NOT found in table";
+                }
                 if (ctx.Items.Count(e => e.ItemId == itemId && e.AddedBy == _userId) > 0)
                 {
                     var entity = ctx.Items.Single(e => e.ItemId == itemId && e.AddedBy == _userId);
 
                     ctx.Items.Remove(entity);
 
-                    return ctx.SaveChanges() == 1 ? "Deleted Successfully" : "Something Went Wrong";
+                    return ctx.SaveChanges() == 1 ? null : "Something Went Wrong";
 
                 }
                 return "Not Found";
