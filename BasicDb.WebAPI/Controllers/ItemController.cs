@@ -29,7 +29,7 @@ namespace BasicDb.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if(ModelState == null)
+            if (ModelState == null)
             {
                 return BadRequest("Model must not be null");
             }
@@ -84,12 +84,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string updateMessage = service.UpdateItem(item);
 
-            if (updateMessage == "Something Went Wrong")
-                return InternalServerError();
-            else if (updateMessage == "Item Not Found")
-                return NotFound();
+            if (updateMessage == null)
+                return Ok(item);
 
-            return Ok(item);
+            return BadRequest(updateMessage);
         }
 
         [HttpDelete]
@@ -99,14 +97,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string deleteMessage = service.DeleteItem(id);
 
-            if (deleteMessage == "Something Went Wrong")
-                return InternalServerError();
+            if (deleteMessage == null)
+                return Ok("Successfully Deleted Item");
 
-            // REPLACE THESE WITH BAD REQUEST TO SEND MESSAGE BACK?
-            if (deleteMessage == "Not Found")
-                return NotFound();
-
-            return Ok("Successfully Deleted Item");
+            return BadRequest(deleteMessage);
         }
     }
 }

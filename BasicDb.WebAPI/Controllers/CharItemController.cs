@@ -31,9 +31,9 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharItemService();
             string errorText = service.CreateCharItem(charItem);
-            if (errorText == "Character/Item Combination created")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Character/Item Combination created");
             }
             return BadRequest(errorText);
         }
@@ -49,9 +49,9 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharItemService();
             string errorText = service.UpdateCharItemById(editCharItem);
-            if (errorText == "Update completed")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Update completed");
             }
 
             return BadRequest(errorText);
@@ -62,9 +62,9 @@ namespace BasicDb.WebAPI.Controllers
         {
             var service = CreateCharItemService();
             string errorText = (service.DeleteCharItemById(charItemId));
-            if (errorText == "Record Deleted")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Record Deleted");
             }
             return BadRequest(errorText);
         }

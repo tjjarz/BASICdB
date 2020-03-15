@@ -39,7 +39,7 @@ namespace BasicDb.Services
                 }
                 ctx.CharItems.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Item Combination created";
+                    return null;
 
                 return "Character/Item Combination NOT created - unknown error";
             }
@@ -74,7 +74,7 @@ namespace BasicDb.Services
                 entity.ItemId = model.ItemId;
 
                 if (ctx.SaveChanges() == 1)
-                    return "Update completed";
+                    return null;
 
                 return "Update failed - unknown error";
             }
@@ -96,7 +96,7 @@ namespace BasicDb.Services
 
                 ctx.CharItems.Remove(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Record Deleted";
+                    return null;
 
                 return "Delete failed - unknown error";
             }
