@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202003121816490_AfterRefresh.designer.cs">
       <DependentUpon>202003121816490_AfterRefresh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003161344467_FixCharacter.cs" />
+    <Compile Include="Migrations\202003161344467_FixCharacter.designer.cs">
+      <DependentUpon>202003161344467_FixCharacter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,6 +113,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003121816490_AfterRefresh.resx">
       <DependentUpon>202003121816490_AfterRefresh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161344467_FixCharacter.resx">
+      <DependentUpon>202003161344467_FixCharacter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

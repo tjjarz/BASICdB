@@ -118,7 +118,7 @@ namespace BasicDb.Services
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,
-                        Medium = e.Media.Medium.ToString(),
+                        Medium = e.Media.MediaType,
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });
@@ -140,7 +140,7 @@ namespace BasicDb.Services
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
                         //Description = e.Media.Description,
-                        MediaType = e.Media.Medium,
+                        MediaType = e.Media.MediaType,
                         AddedBy = e.Media.User.UserName
                     });
                 return entity.ToArray();
