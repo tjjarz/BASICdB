@@ -50,20 +50,20 @@ namespace BasicDb.Services
 //                return ctx.SaveChanges() == 1;
 //            }
 //        }
-        public bool DeleteCharacter(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                        .Characters
-                        .Single(e => e.CharId == id);
-
-                ctx.Characters.Remove(entity);
-
-                return ctx.SaveChanges() == 1;
-            }
-        }
+//        public bool DeleteCharacter(int id)
+//        {
+//            using (var ctx = new ApplicationDbContext())
+//            {
+//                var entity =
+//                    ctx
+//                        .Characters
+//                        .Single(e => e.CharId == id);
+//
+//                ctx.Characters.Remove(entity);
+//
+//                return ctx.SaveChanges() == 1;
+//            }
+//        }
 
         public CharDetail GetCharById(int id)
         {
