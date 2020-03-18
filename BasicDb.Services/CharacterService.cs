@@ -35,7 +35,6 @@ namespace BasicDb.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
         public string UpdateCharacter(CharEdit character)
         {
             using (var ctx = new ApplicationDbContext())
@@ -78,6 +77,7 @@ namespace BasicDb.Services
                 return $"Character {id} not found in Character Table";
             }
         }
+
 
         public CharDetail GetCharById(int id)
         {

@@ -118,7 +118,8 @@ namespace BasicDb.Services
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,
-                        Medium = e.Media.MediaType,
+                        Medium = e.Media.MediaType.ToString(),
+
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });

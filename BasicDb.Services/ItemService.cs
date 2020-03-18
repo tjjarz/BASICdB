@@ -105,7 +105,7 @@ namespace BasicDb.Services
                         Name = entity.Name,
                         Type = entity.Type,
                         Description = entity.Description,
-                        AddedBy = entity.AddedBy
+                        AddedBy = entity.User.UserName
                     };
                 }
 
@@ -128,7 +128,7 @@ namespace BasicDb.Services
                             Name = e.Name,
                             Type = e.Type,
                             Description = e.Description,
-                            AddedBy = e.AddedBy
+                            AddedBy = e.User.UserName
                         });
                 var asArray = entity.ToArray();
                 return asArray;

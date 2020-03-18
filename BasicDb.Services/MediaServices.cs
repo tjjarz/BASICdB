@@ -63,6 +63,7 @@ namespace BasicDb.Services
                         Title = entity.Name,
                         MediaType = entity.MediaType,
                         Description = entity.Description,
+                        AddedBy = entity.User.UserName
                     };
                 }
 
@@ -85,7 +86,7 @@ namespace BasicDb.Services
                             Title = e.Name,
                             MediaType = e.MediaType,
                             Description = e.Description,
-                            AddedBy = e.AddedBy
+                            AddedBy = e.User.UserName
                         });
                 var asArray = entity.ToArray();
                 return asArray;
