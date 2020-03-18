@@ -13,19 +13,10 @@ namespace BasicDb.Data
         [Key]
         public int MediaId { get; set; }
 
-        //[Required]
-        //public string Name { get; set; }  //now getting Name From entry
-
         [Required]
         public string MediaType { get; set; }
 
         [Required]
         public string Description { get; set; }
-
-        //public string AddedBy { get; set; }
-        /*
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }*/
     }
 }

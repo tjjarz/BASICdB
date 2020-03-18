@@ -16,7 +16,6 @@ namespace BasicDb.WebAPI.Controllers
         private CharItemService CreateCharItemService()
 
         {
-            //string userId = Guid.Parse(User.Identity.GetUserId());
             var charItemService = new CharItemService();
             return charItemService;
         }
@@ -31,16 +30,15 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharItemService();
             string errorText = service.CreateCharItem(charItem);
-            if (errorText == "Character/Item Combination created")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Character/Item Combination created");
             }
             return BadRequest(errorText);
         }
 
         [HttpPut]
         public IHttpActionResult UpdateCharItemById(EditCharItem editCharItem)
-        // is this supposed to be this and not : public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
         {
             if (!ModelState.IsValid)
             {
@@ -49,9 +47,9 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharItemService();
             string errorText = service.UpdateCharItemById(editCharItem);
-            if (errorText == "Update completed")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Update completed");
             }
 
             return BadRequest(errorText);
@@ -62,9 +60,9 @@ namespace BasicDb.WebAPI.Controllers
         {
             var service = CreateCharItemService();
             string errorText = (service.DeleteCharItemById(charItemId));
-            if (errorText == "Record Deleted")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Record Deleted");
             }
             return BadRequest(errorText);
         }
@@ -76,13 +74,5 @@ namespace BasicDb.WebAPI.Controllers
             var charItems = charItemService.GetCharItemsByCharId(charId);
             return Ok(charItems);
         }
-        /* this was deleted from your last commit kerry, is that intentional?
-        public IEnumerable<ItemDetail> GetCharItemList(int charId)
-        {
-            CharItemService charItemService = CreateCharItemService();
-            var charItems = charItemService.GetCharItemsByCharId(charId);
-            return charItems;
-        }
-        */
     }
 }

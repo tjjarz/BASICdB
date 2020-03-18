@@ -39,7 +39,7 @@ namespace BasicDb.Services
                 }
                 ctx.CharMedia.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Media Combination created";
+                    return null;
 
                 return "Character/Media Combination NOT created - unknown error";
             }
@@ -74,7 +74,7 @@ namespace BasicDb.Services
                 entity.MediaId = model.MediaId;
 
                 if (ctx.SaveChanges() == 1)
-                    return "Update completed";
+                    return null;
 
                 return "Update failed - unknown error";
             }
@@ -95,7 +95,7 @@ namespace BasicDb.Services
 
                 ctx.CharMedia.Remove(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Record Deleted";
+                    return null;
 
                 return "Delete failed - unknown error";
             }
@@ -118,7 +118,7 @@ namespace BasicDb.Services
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,
-                        Medium = e.Media.Medium.ToString(),
+                        Medium = e.Media.MediaType,
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });
@@ -140,7 +140,7 @@ namespace BasicDb.Services
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
                         //Description = e.Media.Description,
-                        MediaType = e.Media.Medium,
+                        MediaType = e.Media.MediaType,
                         AddedBy = e.Media.User.UserName
                     });
                 return entity.ToArray();

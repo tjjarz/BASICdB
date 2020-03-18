@@ -13,23 +13,10 @@ namespace BasicDb.Data
         [Key]
         public int CharId { get; set; }
 
-        //[Required]
-        //public string Name { get; set; }
-
-        //public virtual List<Item> Item { get; set; }
-
-        //public virtual List<Media> Media { get; set; }
-
         [Required]
         public string ShortDescription { get; set; }
 
         public string Description { get; set; }
-
-        //public string UserId { get; set; }
-
-        //public virtual ApplicationUser User { get; set; }
-
-        // add created and updated datetimes
 
     }
 }
