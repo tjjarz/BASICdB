@@ -1,4 +1,6 @@
-# BASICdB
+![BASICdB-Logo](https://github.com/tjjarz/BASICdB/blob/master/BASICdB-Logo-Hero.png)
+
+
 >Basically, it's a database builder for narrative media series.
 
 ## A Few Notes
