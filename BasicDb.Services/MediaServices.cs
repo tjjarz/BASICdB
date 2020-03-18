@@ -63,6 +63,7 @@ namespace BasicDb.Services
                         Title = entity.Name,
                         MediaType = entity.MediaType,
                         Description = entity.Description,
+                        AddedBy = entity.User.UserName
                     };
                 }
 
@@ -85,7 +86,7 @@ namespace BasicDb.Services
                             Title = e.Name,
                             MediaType = e.MediaType,
                             Description = e.Description,
-                            AddedBy = e.AddedBy
+                            AddedBy = e.User.UserName
                         });
                 var asArray = entity.ToArray();
                 return asArray;
@@ -97,6 +98,10 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Media.Count(e => e.MediaId == media.MediaId) == 0)
+                {
+                    return $"Media ID {media.MediaId} NOT found in table";
+                }
                 var entity = ctx.Media.Single(e => e.MediaId == media.MediaId && e.AddedBy == _userId);
                 entity.MediaId = media.MediaId;
                 entity.Name = media.Title;
@@ -105,7 +110,7 @@ namespace BasicDb.Services
                 entity.AddedBy = media.AddedBy;
                 //entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1 ? "Media has been updated " : "Media was not updated";
+                return ctx.SaveChanges() == 1 ? null : "Media was not updated";
             }
         }
 
@@ -114,6 +119,10 @@ namespace BasicDb.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Media.Count(e => e.MediaId == Id) == 0)
+                {
+                    return $"Media ID {Id} NOT found in table";
+                }
                 var entity =
                     ctx
                         .Media
@@ -121,7 +130,7 @@ namespace BasicDb.Services
 
                 ctx.Media.Remove(entity);
 
-                return ctx.SaveChanges() == 1 ? "Successfully deleted media" : "Unsuccessful deletion of media";
+                return ctx.SaveChanges() == 1 ? null : "Unsuccessful deletion of media";
             }
         }
     }

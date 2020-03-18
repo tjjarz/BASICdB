@@ -26,9 +26,9 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharMediaService();
             string errorText = service.CreateCharMedia(charMedia);
-            if (errorText == "Character/Media Combination created")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Character/Media Combination created");
             }
             return BadRequest(errorText);
         }
@@ -43,9 +43,9 @@ namespace BasicDb.WebAPI.Controllers
 
             var service = CreateCharMediaService();
             string errorText = service.UpdateCharMediaById(editCharMedia);
-            if (errorText == "Update completed")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Update completed");
             }
 
             return BadRequest(errorText);
@@ -56,9 +56,9 @@ namespace BasicDb.WebAPI.Controllers
         {
             var service = CreateCharMediaService();
             string errorText = (service.DeleteCharMediaById(charMediaId));
-            if (errorText == "Record Deleted")
+            if (errorText == null)
             {
-                return Ok();
+                return Ok("Record Deleted");
             }
             return BadRequest(errorText);
         }

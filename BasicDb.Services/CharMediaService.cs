@@ -39,7 +39,7 @@ namespace BasicDb.Services
                 }
                 ctx.CharMedia.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Media Combination created";
+                    return null;
 
                 return "Character/Media Combination NOT created - unknown error";
             }
@@ -74,7 +74,7 @@ namespace BasicDb.Services
                 entity.MediaId = model.MediaId;
 
                 if (ctx.SaveChanges() == 1)
-                    return "Update completed";
+                    return null;
 
                 return "Update failed - unknown error";
             }
@@ -95,7 +95,7 @@ namespace BasicDb.Services
 
                 ctx.CharMedia.Remove(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Record Deleted";
+                    return null;
 
                 return "Delete failed - unknown error";
             }
@@ -118,7 +118,8 @@ namespace BasicDb.Services
                         Description = e.Character.Description,
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,
-                        Medium = e.Media.Medium.ToString(),
+                        Medium = e.Media.MediaType.ToString(),
+
                         MediaDescription = e.Media.Description
                         //CharItems = e.Character.Item
                     });
@@ -140,8 +141,28 @@ namespace BasicDb.Services
                         MediaId = e.Media.MediaId,
                         Title = e.Media.Name,    //leaving this difference to illustrate we could have data "labeled" differently with models
                         //Description = e.Media.Description,
-                        MediaType = e.Media.Medium,
+                        MediaType = e.Media.MediaType,
                         AddedBy = e.Media.User.UserName
+                    });
+                return entity.ToArray();
+            }
+        }
+
+        //this method is used by the CharacterController to get a character's list of items for display
+        public IEnumerable<CharListItem> GetCharsFromCharMediaList(int mediaId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharMedia
+                    .Where(e => e.Media.MediaId == mediaId)
+                    .Select
+                    (e => new CharListItem
+                    {
+                        CharId = e.Character.CharId,
+                        Name = e.Character.Name,
+                        ShortDescription = e.Character.ShortDescription
                     });
                 return entity.ToArray();
             }

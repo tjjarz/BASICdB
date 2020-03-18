@@ -28,7 +28,6 @@ namespace BasicDb.Services
                     AddedBy = _userId,
                     CreatedOn = DateTime.Now,
                     ModifiedOn = DateTime.Now
-                    //CreatedUtc = DateTimeOffset.Now
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -36,24 +35,35 @@ namespace BasicDb.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
-        public bool UpdateCharacter(CharEdit character)
+        public string UpdateCharacter(CharEdit character)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == character.CharId) == 0)
+                {
+                    return $"Character {character.CharId} NOT found in table";
+                }
                 var entity = ctx.Characters.Single(e => e.CharId == character.CharId);
                 entity.Name = character.Name;
                 entity.ShortDescription = character.ShortDescription;
                 entity.Description = character.Description;
                 entity.ModifiedOn = DateTime.Now;
 
-                return ctx.SaveChanges() == 1;
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {character.CharId} NOT updated - unknown error";
             }
         }
-        public bool DeleteCharacter(int id)
+
+        public string DeleteCharacter(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                if (ctx.Characters.Count(e => e.CharId == id) == 0)
+                {
+                    return $"Character {id} NOT found in table";
+                }
                 var entity =
                     ctx
                         .Characters
@@ -61,9 +71,13 @@ namespace BasicDb.Services
 
                 ctx.Characters.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                if (ctx.SaveChanges() == 1)
+                    return null;
+
+                return $"Character {id} not found in Character Table";
             }
         }
+
 
         public CharDetail GetCharById(int id)
         {
@@ -83,8 +97,6 @@ namespace BasicDb.Services
                         CreatedOn = entity.CreatedOn,
                         ModifiedOn = entity.ModifiedOn,
                         AddedBy = entity.User.UserName
-
-                        //will need lists and user here too eventually
                     };
             }
         }
@@ -106,23 +118,23 @@ namespace BasicDb.Services
             return entity;
         }
 
-        public IEnumerable<CharListItem> GetCharacters(string name)
+        public IEnumerable<CharListItem> GetCharByName(string name)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Characters
-                    .Where(e => e.Name.Contains(name))
-                    .Select
-                    (e => new CharListItem
-                    {
-                        CharId = e.CharId,
-                        Name = e.Name,
-                        ShortDescription = e.ShortDescription
-                    });
-                    //var asArray = entity.ToArray();
-                return entity;
+                        .Characters
+                        .Where(e => e.Name.Contains(name))
+                        .Select
+                        (e => new CharListItem
+                        {
+                            CharId = e.CharId,
+                            Name = e.Name,
+                            ShortDescription = e.ShortDescription
+                        });
+                var asArray = entity.ToArray();
+                return asArray;
             }
         }
 

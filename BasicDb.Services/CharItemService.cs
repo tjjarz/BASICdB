@@ -39,7 +39,7 @@ namespace BasicDb.Services
                 }
                 ctx.CharItems.Add(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Character/Item Combination created";
+                    return null;
 
                 return "Character/Item Combination NOT created - unknown error";
             }
@@ -74,7 +74,7 @@ namespace BasicDb.Services
                 entity.ItemId = model.ItemId;
 
                 if (ctx.SaveChanges() == 1)
-                    return "Update completed";
+                    return null;
 
                 return "Update failed - unknown error";
             }
@@ -96,7 +96,7 @@ namespace BasicDb.Services
 
                 ctx.CharItems.Remove(entity);
                 if (ctx.SaveChanges() == 1)
-                    return "Record Deleted";
+                    return null;
 
                 return "Delete failed - unknown error";
             }
@@ -112,16 +112,6 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    //                    .Characters
-                    //                    .Single(e => e.CharId == charId);
-                    //                return new Character
-                    //                {
-                    //                    Name = entity.Name,
-                    //                    ShortDescription = entity.ShortDescription,
-                    //                    Description = entity.Description//,
-                    //                    //CharItems = entity.CharItems
-                    //                };
-                    //>>>>>>> dev
                     (e => new GetCharItem
                     {
                         CharId = e.Character.CharId,
@@ -132,12 +122,11 @@ namespace BasicDb.Services
                         ItemType = e.Item.Type,
                         ItemName = e.Item.Name,
                         ItemDescription = e.Item.Description
-                        //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
             }
         }
-        //newwer betterer get charitems list
+        //this method is used by the CharacterController to get a character's list of items for display
         public IEnumerable<ItemGetAll> GetCharItemList(int charId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -153,7 +142,26 @@ namespace BasicDb.Services
                         Name = e.Item.Name,
                         Type = e.Item.Type,
                         AddedBy = e.Item.User.UserName
-                        //CharItems = e.Character.Item
+                    });
+                return entity.ToArray();
+            }
+        }
+
+        //this method is used by the CharacterController to get a character's list of items for display
+        public IEnumerable<CharListItem> GetCharsFromCharItemList(int itemId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharItems
+                    .Where(e => e.Item.ItemId == itemId)
+                    .Select
+                    (e => new CharListItem
+                    {
+                        CharId = e.Character.CharId,
+                        Name = e.Character.Name,
+                        ShortDescription = e.Character.ShortDescription
                     });
                 return entity.ToArray();
             }

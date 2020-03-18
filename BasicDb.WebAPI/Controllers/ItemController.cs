@@ -22,6 +22,9 @@ namespace BasicDb.WebAPI.Controllers
             return itemService;
         }
 
+        private CharItemService CreateCharItemService()
+        { var service = new CharItemService(); return service; }
+
         [HttpPost]
         public IHttpActionResult Post(ItemCreate item)
         {
@@ -29,7 +32,7 @@ namespace BasicDb.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if(ModelState == null)
+            if (ModelState == null)
             {
                 return BadRequest("Model must not be null");
             }
@@ -56,14 +59,17 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetItemById(int id)
         {
             ItemService service = CreateItemService();
+            CharItemService charItemService = CreateCharItemService();
             var item = service.GetItemById(id);
             if (item.Name == "pbtd")
                 return NotFound();
 
+            var charItemChars = charItemService.GetCharsFromCharItemList(id);    //gets list of items from CharItemService
+            item.Characters = charItemChars.ToList();
+
             return Ok(item);
         }
 
-        //Get item by Name (returns as ItemDetail)
         public IHttpActionResult GetName(string name)
         {
             ItemService service = CreateItemService();
@@ -84,12 +90,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string updateMessage = service.UpdateItem(item);
 
-            if (updateMessage == "Something Went Wrong")
-                return InternalServerError();
-            else if (updateMessage == "Item Not Found")
-                return NotFound();
+            if (updateMessage == null)
+                return Ok(item);
 
-            return Ok(item);
+            return BadRequest(updateMessage);
         }
 
         [HttpDelete]
@@ -99,14 +103,10 @@ namespace BasicDb.WebAPI.Controllers
 
             string deleteMessage = service.DeleteItem(id);
 
-            if (deleteMessage == "Something Went Wrong")
-                return InternalServerError();
+            if (deleteMessage == null)
+                return Ok("Successfully Deleted Item");
 
-            // REPLACE THESE WITH BAD REQUEST TO SEND MESSAGE BACK?
-            if (deleteMessage == "Not Found")
-                return NotFound();
-
-            return Ok("Successfully Deleted Item");
+            return BadRequest(deleteMessage);
         }
     }
 }
