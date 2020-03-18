@@ -94,7 +94,7 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetCharacters(string name)
         {
             CharacterService characterService = CreateCharService();
-            var characters = characterService.GetCharacters(name);
+            var characters = characterService.GetCharByName(name);
 
             return Ok(characters);
         }
