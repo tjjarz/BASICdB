@@ -192,7 +192,8 @@ Description:Hermione is the smart student in the main bunch
 no output expected
 ```
 \
-**Delete a Character:** `/api/character`
+**Delete a Character:** `/api/character{#}`
+
 *Expected Input:*
 ```
 no input expected
@@ -262,6 +263,146 @@ no input expected
 ```
 \
 **Delete a Item** `/api/item/{#}`
+
+*Expected Input:*
+```
+no input required
+```
+*Expected Output:*
+```
+no output expected
+```
+
+### Character/Media Link Endpoints
+\
+**Add a Character/Media Link** `/api/CharMedia`
+
+*Expected Input:*
+```
+CharId: 4
+MediaId: 1
+```
+*Expected Output:*
+```
+no output expected
+```
+\
+**Update a Character/Media Link** `/api/CharMedia`
+
+*Expected Input:*
+```
+CharMediaId: 3
+CharId: 2
+MediaId: 2
+```
+*Expected Output:*
+```
+no output expected
+```
+\
+**View One Character/Media Link:** `/api/CharMedia?charId={#}`
+
+*Expected Input:*
+```
+no input expected
+```
+*Expected Output:*
+```
+[
+    {
+        "CharId": 1,
+        "Name": "Harry Potter",
+        "ShortDescription": "Harry",
+        "Description": "Wizard Harry",
+        "MediaId": 1,
+        "Title": "Sorcerer's Stone",
+        "Medium": "Book",
+        "MediaDescription": "First in the saga of Harry Potter"
+    },
+    {
+        "CharId": 1,
+        "Name": "Harry Potter",
+        "ShortDescription": "Harry",
+        "Description": "Wizard Harry",
+        "MediaId": 2,
+        "Title": "Sorcerer's Stone",
+        "Medium": "Movie",
+        "MediaDescription": "First in the saga of Harry Potter"
+    }
+]
+```
+\
+**Delete a Character/Media Link** `/api/CharMedia?charMediaId={#}`
+
+*Expected Input:*
+```
+no input required
+```
+*Expected Output:*
+```
+no output expected
+```
+
+### Character/Item Link Endpoints
+\
+**Add a Character/Item Link** `/api/CharItem`
+
+*Expected Input:*
+```
+CharId: 3
+ItemId: 1
+```
+*Expected Output:*
+```
+no output expected
+```
+\
+**Update a Character/Item Link** `/api/CharItem`
+
+*Expected Input:*
+```
+CharItemId:1
+CharId: Harry's Magic Wand
+ItemId: Wand
+```
+*Expected Output:*
+```
+no output expected
+```
+\
+**View One Character/Item Link:** `/api/CharItem?charId={#}`
+
+*Expected Input:*
+```
+no input expected
+```
+*Expected Output:*
+```
+[
+    {
+        "CharId": 1,
+        "Name": "Harry Potter",
+        "ShortDescription": "Harry",
+        "ItemDescription": "Chooses the wizard",
+        "Description": "Wizard Harry",
+        "ItemId": 2,
+        "ItemType": "Wizard tool",
+        "ItemName": "Wand"
+    },
+    {
+        "CharId": 1,
+        "Name": "Harry Potter",
+        "ShortDescription": "Harry",
+        "ItemDescription": "Most powerful wand",
+        "Description": "Wizard Harry",
+        "ItemId": 1,
+        "ItemType": "Wizard tool",
+        "ItemName": "Elder Wand"
+    }
+]
+```
+\
+**Delete a Character/Item Link** `/api/CharItem?charItemId={#}`
 
 *Expected Input:*
 ```
