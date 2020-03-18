@@ -24,6 +24,7 @@ namespace BasicDb.Models
         public int MediaId { get; set; }
         public string Title { get; set; }
         public string MediaType { get; set; }
+        public List<CharListItem> Characters { get; set; }
         public string Description { get; set; }
         public string AddedBy { get; set; }
     }

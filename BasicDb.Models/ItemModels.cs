@@ -37,6 +37,7 @@ namespace BasicDb.Models
         public int ItemId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
+        public List<CharListItem> Characters { get; set; }
         public string Description { get; set; }
         public string AddedBy { get; set; }
 
