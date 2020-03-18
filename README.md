@@ -50,7 +50,7 @@ grant_type:password
 ```
 MediaId:1
 Title:Sorcerer's Stone
-Medium:3
+MediaType: Book
 Description:Harry Potter and the Sorcerer's Stone, the first book
 ```
 \
@@ -64,32 +64,54 @@ no input required
 ```
 [
     {
-        "User": null,
         "MediaId": 1,
         "Title": "Sorcerer's Stone",
-        "Medium": 3,
+        "MediaType": "Book",
         "Description": "Harry Potter and the Sorcerer's Stone, the first book",
-        "UserId": null
+        "UserId": UserName
     },
     {
-        "User": null,
         "MediaId": 2,
+        "Title": "Sorcerer's Stone",
+        "MediaType": "Movie",
+        "Description": "Harry Potter and the Sorcerer's Stone, the first movie",
+        "UserId": UserName
+    },
+    {
+        "MediaId": 3,
         "Title": "Goblet of Fire",
-        "Medium": 5,
+        "MediaType": "Book",
         "Description": "Harry Potter and the Goblet of Fire, the fourth(?) book",
-        "UserId": null
+        "UserId": UserName
     }
 ]
+```
+\
+**View One Media:** `/api/media/{#}`
+
+*Expected Input:*
+```
+no input expected
+```
+*Expected Output:*
+```
+{
+        "MediaId": 1,
+        "Title": "Sorcerer's Stone",
+        "MediaType": "Book",
+        "Description": "Harry Potter and the Sorcerer's Stone, the first book",
+        "UserId": UserName
+    }
 ```
 \
 **Update a Media** `/api/media`
 
 *Expected Input:*
 ```
-MediaId:1
-Title:Goblet of Fire
-Medium:5
-Description:Harry Potter and the Goblet of Fire, the fourth(?) book
+MediaId: 2
+Title: Goblet of Fire
+MediaType: Book
+Description: Harry Potter and the Goblet of Fire, the fourth(?) book
 ```
 *Expected Output:*
 ```
@@ -104,7 +126,7 @@ no input required
 ```
 *Expected Output:*
 ```
-no output expected
+"Successfully deleted"
 ```
 
 
@@ -181,3 +203,71 @@ no output expected
 ```
 
 ### Item Endpoints
+**Create Item** `/api/item`
+
+*Expected Input:*
+```
+Name: Harry's Wand
+Type: Wand
+Description: Harry Potter's magical stick.
+```
+\
+**Get All Item** `/api/item`
+
+*Expected Input:*
+```
+no input required
+```
+*Expected Output:*
+```
+[
+    {
+        "Name": "Harry's Wand",
+        "Type": "Wand",
+        "Description": "Harry Potter's magical stick",
+        "UserId": Username
+    }
+]
+```
+\
+**Update a Item** `/api/item`
+
+*Expected Input:*
+```
+ItemId:1
+Name: Harry's Magic Wand
+Type: Wand
+Description: Harry Potter's powerful stick
+```
+*Expected Output:*
+```
+no output expected
+```
+\
+**View One Item:** `/api/item/{#}`
+
+*Expected Input:*
+```
+no input expected
+```
+*Expected Output:*
+```
+{
+        "ItemId": 1,
+        "Name": "Harry's Magic Wand",
+        "Type": "Wand",
+        "Description": "Harry Potter's powerful stick",
+        "UserId": Username
+    }
+```
+\
+**Delete a Item** `/api/item/{#}`
+
+*Expected Input:*
+```
+no input required
+```
+*Expected Output:*
+```
+no output expected
+```
