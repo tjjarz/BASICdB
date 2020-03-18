@@ -146,5 +146,25 @@ namespace BasicDb.Services
                 return entity.ToArray();
             }
         }
+
+        //this method is used by the CharacterController to get a character's list of items for display
+        public IEnumerable<CharListItem> GetCharsFromCharItemList(int itemId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .CharItems
+                    .Where(e => e.Item.ItemId == itemId)
+                    .Select
+                    (e => new CharListItem
+                    {
+                        CharId = e.Character.CharId,
+                        Name = e.Character.Name,
+                        ShortDescription = e.Character.ShortDescription
+                    });
+                return entity.ToArray();
+            }
+        }
     }
 }

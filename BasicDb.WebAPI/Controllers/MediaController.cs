@@ -42,6 +42,9 @@ namespace BasicDb.WebAPI.Controllers
             return mediaService;
         }
 
+        private CharMediaService CreateCharMediaService()
+        { var service = new CharMediaService(); return service; }
+
         //GET
         [HttpGet]
         public IHttpActionResult Get()
@@ -56,6 +59,12 @@ namespace BasicDb.WebAPI.Controllers
         {
             MediaService mediaService = CreateMediaService();
             var mediaById = mediaService.GetMediaById(id);
+
+            CharMediaService charMediaService = CreateCharMediaService();
+
+            var charMediaChars = charMediaService.GetCharsFromCharMediaList(id);
+            mediaById.Characters = charMediaChars.ToList();
+
             return Ok(mediaById);
         }
 

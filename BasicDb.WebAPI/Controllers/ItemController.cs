@@ -22,6 +22,9 @@ namespace BasicDb.WebAPI.Controllers
             return itemService;
         }
 
+        private CharItemService CreateCharItemService()
+        { var service = new CharItemService(); return service; }
+
         [HttpPost]
         public IHttpActionResult Post(ItemCreate item)
         {
@@ -56,9 +59,13 @@ namespace BasicDb.WebAPI.Controllers
         public IHttpActionResult GetItemById(int id)
         {
             ItemService service = CreateItemService();
+            CharItemService charItemService = CreateCharItemService();
             var item = service.GetItemById(id);
             if (item.Name == "pbtd")
                 return NotFound();
+
+            var charItemChars = charItemService.GetCharsFromCharItemList(id);    //gets list of items from CharItemService
+            item.Characters = charItemChars.ToList();
 
             return Ok(item);
         }
