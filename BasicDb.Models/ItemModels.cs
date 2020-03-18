@@ -14,10 +14,6 @@ namespace BasicDb.Models
         public string Type { get; set; }
         public string Description { get; set; }
 
-
-        //[ForeignKey(nameof(User))]
-        //public string AddedBy { get; set; }
-        //public virtual ApplicationUser User { get; set; }
     }
 
     public class ItemGetAll

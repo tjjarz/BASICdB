@@ -16,7 +16,6 @@ namespace BasicDb.WebAPI.Controllers
         private CharItemService CreateCharItemService()
 
         {
-            //string userId = Guid.Parse(User.Identity.GetUserId());
             var charItemService = new CharItemService();
             return charItemService;
         }
@@ -40,7 +39,6 @@ namespace BasicDb.WebAPI.Controllers
 
         [HttpPut]
         public IHttpActionResult UpdateCharItemById(EditCharItem editCharItem)
-        // is this supposed to be this and not : public IHttpActionResult UpdateCharItemById(int charItem, PostCharItem editCharItem)
         {
             if (!ModelState.IsValid)
             {
@@ -76,13 +74,5 @@ namespace BasicDb.WebAPI.Controllers
             var charItems = charItemService.GetCharItemsByCharId(charId);
             return Ok(charItems);
         }
-        /* this was deleted from your last commit kerry, is that intentional?
-        public IEnumerable<ItemDetail> GetCharItemList(int charId)
-        {
-            CharItemService charItemService = CreateCharItemService();
-            var charItems = charItemService.GetCharItemsByCharId(charId);
-            return charItems;
-        }
-        */
     }
 }

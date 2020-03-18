@@ -112,16 +112,6 @@ namespace BasicDb.Services
                     .CharItems
                     .Where(e => e.Character.CharId == charId)
                     .Select
-                    //                    .Characters
-                    //                    .Single(e => e.CharId == charId);
-                    //                return new Character
-                    //                {
-                    //                    Name = entity.Name,
-                    //                    ShortDescription = entity.ShortDescription,
-                    //                    Description = entity.Description//,
-                    //                    //CharItems = entity.CharItems
-                    //                };
-                    //>>>>>>> dev
                     (e => new GetCharItem
                     {
                         CharId = e.Character.CharId,
@@ -132,12 +122,11 @@ namespace BasicDb.Services
                         ItemType = e.Item.Type,
                         ItemName = e.Item.Name,
                         ItemDescription = e.Item.Description
-                        //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
             }
         }
-        //newwer betterer get charitems list
+        //this method is used by the CharacterController to get a character's list of items for display
         public IEnumerable<ItemGetAll> GetCharItemList(int charId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -153,7 +142,6 @@ namespace BasicDb.Services
                         Name = e.Item.Name,
                         Type = e.Item.Type,
                         AddedBy = e.Item.User.UserName
-                        //CharItems = e.Character.Item
                     });
                 return entity.ToArray();
             }
