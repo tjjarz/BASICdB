@@ -98,39 +98,5 @@ namespace BasicDb.WebAPI.Controllers
 
             return Ok(characters);
         }
-//<<<<<<< kerry9
-//            if (ModelState.IsValid == false) return BadRequest(ModelState);
-//            var service = CreateCharService();
-//            string error = (service.UpdateCharacter(character));
-//            if (error != null) 
-//                return BadRequest(error);
-//
-//            return Ok();
-//        }
-//
-//        //Create Character, takes a Character and uses CreateCharacter service
-//        public IHttpActionResult Post(CharCreate character)
-//        {
-//            if (ModelState.IsValid == false) return BadRequest(ModelState);
-//            var service = CreateCharService();
-//            if (service.CreateCharacter(character) == false) return InternalServerError();
-//            return Ok();
-//        }
-//        
-//        //Deletes a character by CharId, using DeleteCharacter
-//        public IHttpActionResult Delete(int id)
-//        {
-//            var service = CreateCharService();
-//            string error = (service.DeleteCharacter(id));
-//            if (error != null)
-//                return BadRequest(error);
-//
-//            return Ok();
-//=======
-//            CharacterService characterService = CreateCharService();
-//            var characters = characterService.GetCharacters(name);
-//
-//            return Ok(characters);
-//>>>>>>> dev
     }
 }
